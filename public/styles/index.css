@@ -1,0 +1,461 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+
+.hero video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.55));
+}
+
+.hero-text-section {
+  position: relative;
+  background: var(--ivory);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(100vh);
+  animation: heroFadeInUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+.hero-content {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 6.25rem 1.5rem;
+  color: var(--charcoal);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--taupe);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--taupe-light);
+}
+
+.hero-content h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.1;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  max-width: 15ch;
+  margin: 1rem 0;
+  color: var(--charcoal);
+}
+
+.hero-content p {
+  max-width: 70ch;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro {
+  background: var(--ivory);
+}
+
+.intro-overlay {
+  position: absolute;
+  top: 8vh;
+  left: 0;
+  right: 0;
+  background: transparent;
+  margin: 0;
+  z-index: 15;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.intro-overlay .inner {
+  pointer-events: auto;
+}
+
+.intro-overlay .section-tag {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.center-section-tag {
+    display: block !important;
+}
+
+.intro-overlay .section-tag::before {
+  background: rgba(196, 168, 130, 0.6);
+}
+
+.intro-overlay .section-title {
+  color: var(--white);
+  text-align: center;
+}
+
+.intro-overlay .inner {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .intro-overlay {
+    top: 8vh;
+  }
+}
+
+
+.services {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-top: 2.5rem;
+}
+
+.card {
+  border: 1px solid rgba(196, 168, 130, 0.2);
+  padding: 1.3rem;
+  background: rgba(250, 250, 247, 0.04);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.card h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}
+
+.card p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.awards {
+  background: var(--ivory);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.1rem;
+}
+
+.pillar {
+  border: 1px solid var(--ivory-deep);
+  background: var(--ivory-dark);
+  padding: 1.15rem;
+}
+
+.pillar h3 {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.about {
+  background: var(--ivory-dark);
+}
+
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+.about-wrap img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.about p {
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.testimonials {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+
+.testimonials .section-tag {
+  color: var(--gold-soft);
+}
+
+.testimonials .section-tag::before {
+  background: var(--taupe-light);
+}
+
+.quotes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.2rem;
+}
+
+blockquote {
+  margin: 0;
+  padding: 1.4rem;
+  border: 1px solid rgba(196, 168, 130, 0.2);
+  background: rgba(250, 250, 247, 0.04);
+}
+
+blockquote p {
+  margin-bottom: 1rem;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+blockquote cite {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.prices {
+  background: var(--ivory);
+}
+
+.table-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin-top: 2.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 1px solid var(--ivory-deep);
+  vertical-align: top;
+}
+
+th {
+  background: var(--ivory-dark);
+  font-size: 0.98rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+td {
+  font-size: 1.02rem;
+}
+
+.retreat {
+  background: var(--ivory-dark);
+}
+
+.contact {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+
+.contact .section-tag {
+  color: var(--gold-soft);
+}
+
+.contact .section-tag::before {
+  background: var(--taupe-light);
+}
+
+.contact .section-title {
+  color: var(--white);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.contact-main {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1.2rem;
+}
+
+.contact-tiles {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.contact-tile {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-decoration: none;
+  border: 1px solid rgba(196, 168, 130, 0.32);
+  background: rgba(250, 250, 247, 0.06);
+  padding: 1.25rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.contact-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(196, 168, 130, 0.6);
+  background: rgba(250, 250, 247, 0.1);
+}
+
+.contact-icon {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--charcoal);
+  background: var(--gold-soft);
+}
+
+.contact-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-tile h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.contact-tile p {
+  color: rgba(250, 250, 247, 0.9);
+  margin-bottom: 0.6rem;
+}
+
+.contact-meta {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-soft);
+}
+
+.contact-image-placeholder {
+  border: 1px dashed rgba(196, 168, 130, 0.5);
+  background: linear-gradient(145deg, rgba(250, 250, 247, 0.05), rgba(196, 168, 130, 0.12));
+  min-height: 360px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: rgba(250, 250, 247, 0.7);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.contact-image-placeholder img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.retreat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.3rem;
+  margin-top: 2rem;
+}
+
+.retreat img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+}
+
+.retreat p {
+  font-size: 1.06rem;
+  line-height: 1.82;
+}
+
+.retreat-meta {
+  margin-top: 1rem;
+}
+
+@media (max-width: 960px) {
+  .contact-tiles {
+    grid-template-rows: auto;
+  }
+
+  .cards,
+  .pillars,
+  .quotes,
+  .table-wrap,
+  .about-wrap,
+  .contact-grid,
+  .retreat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 9vw, 3.8rem);
+  }
+}
