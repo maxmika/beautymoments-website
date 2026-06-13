@@ -6,7 +6,9 @@
 - Betreiberin: Cindy — führt zwei Kosmetik-/Beauty-Studios und etabliert sich
   zusätzlich als Ausbilderin.
 - Repo-Root: `beautymoments-website`; Quelldateien liegen unter `public/`
-  (inkl. `index.html` und Medien-Ordnern).
+  mit je einem Ordner pro Deploy-Ziel: `public/main/`, `public/schorndorf/`,
+  `public/gmuend/`. Design-Referenzen unter `reference/` (wird nie deployed).
+  Deploy-Befehle und Ressourcen-IDs: siehe `DEPLOY.md`.
 
 ## Domains, Inhalte & Design
 - **beautymoments.de** (Hauptseite): Cindy ausführlich vorgestellt. Layout:
@@ -59,32 +61,33 @@
 - Kein Build. Deploy = `aws s3 sync <quelle> s3://<bucket> --delete`
   + CloudFront-Invalidation (`/*`).
 
-## Vorgehen — Phase 1: Infrastruktur (JETZT)
-Der Inhalt in `public/` vermischt aktuell beide Studios. **Inhaltliche
-Trennung erfolgt in einer SPÄTEREN, separaten Phase — jetzt nicht anfassen.**
+## Stand (zuletzt aktualisiert: 2026-06-12)
+- **Phase 1 (Infrastruktur): ERLEDIGT.** Alle drei Domains live mit HTTPS +
+  www-Redirect. Hosted Zone musste entgegen früherer Annahme neu angelegt
+  werden (Domain war via Route53 Domains registriert, NS zeigten auf einen
+  Parking-Dienst); inzwischen existiert sie — nutzen, nicht neu anlegen.
+- **Content-Phase begonnen:** Repo-Struktur umgesetzt (s. u.), der bisherige
+  Site-Code (Schorndorf-Variante) liegt unter `public/schorndorf/` und ist
+  auf schorndorf.beautymoments.de live. `beautymoments.de` und
+  gmuend.beautymoments.de zeigen neutrale Platzhalter.
+- **Nächster Schritt:** neue Landingpage für beautymoments.de
+  (Layout s. „Domains, Inhalte & Design").
 
-1. Komplette Infra für alle drei Domains aufsetzen (Buckets, OAC,
-   Distributionen, Zertifikat, www-Function, DNS) → HTTPS + www-Redirect
-   für alle drei.
-2. Aktuellen `public/`-Inhalt nach **main** (`beautymoments.de`) deployen.
-3. Auf **schorndorf** und **gmuend** je eine einfache Platzhalterseite
-   (`index.html`: "Beauty Moments <Ort> — Website in Vorbereitung", neutral
-   gehalten, solange die Akzentfarben noch nicht feststehen).
-
-## Ziel-Repo-Struktur (Vorschlag für spätere Content-Phase — JETZT NICHT umsetzen)
+## Repo-Struktur (umgesetzt)
 ```
 beautymoments-website/
   public/
     main/        → beautymoments.de
     schorndorf/  → schorndorf.beautymoments.de
     gmuend/      → gmuend.beautymoments.de
-    shared/      → gemeinsame Assets (optional)
+  reference/     → Design-Referenzen (wird nie deployed)
+  DEPLOY.md      → Deploy-How-To + Ressourcen-IDs
 ```
+(`public/shared/` für gemeinsame Assets: optional, bei Bedarf später.)
 
 ## Tabu / Vorsicht
-- Den bestehenden, fremden Test-Bucket (hängt an einer anderen Domain) **nicht
-  anfassen**.
-- In Phase 1 **keine** inhaltliche Umstrukturierung.
+- Den bestehenden, fremden Test-Bucket `beautymoments-schorndorf.emmics.de`
+  (hängt an einer anderen Domain) **nicht anfassen**.
 - Vor jeder Aktion an IAM/Permissions oder DNS: **einzeln zur Freigabe vorlegen.**
 - Erst den vollständigen Plan inkl. aller geplanten AWS-Ressourcen zeigen,
   bevor etwas angelegt wird.
