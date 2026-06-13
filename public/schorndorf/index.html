@@ -2,14 +2,15 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Beauty Moments Schorndorf - Kosmetikstudio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Beauty Moments Schorndorf — Kosmetikstudio</title>
     <meta
       name="description"
       content="Dein Kosmetikstudio in Schorndorf. NiSV zertifiziert seit 2019. Head-Spa, Diodenlaser, Aquafacial und Microneedling."
     />
     <meta name="theme-color" content="#2c2824" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/index.css" />
   </head>
@@ -31,14 +32,14 @@
     </nav>
 
     <section id="hero" class="section hero">
-      <video autoplay muted loop playsinline poster="assets/media-v2/images/hero-poster.jpg">
+      <video autoplay muted loop playsinline aria-hidden="true" poster="assets/media-public/images/hero-poster.jpg">
         <source src="assets/media-public/videos/hero-video.mp4" type="video/mp4" />
       </video>
 
       <div id="intro" class="section intro intro-overlay">
         <div class="inner">
           <h2 class="section-title">Elevate your everyday.</h2>
-          <p class="section-tag center-section-tag">Dein Kosmetikstudio in Schorndorf</p>
+          <p class="section-tag">Dein Kosmetikstudio in Schorndorf</p>
         </div>
       </div>
     </section>
@@ -60,17 +61,17 @@
         <h2 class="section-title">Unsere Leistungen</h2>
         <div class="cards">
           <article class="card">
-            <img src="assets/media-public/images/dioden.jpg" alt="Diodenlaser" />
+            <img src="assets/media-public/images/dioden.jpg" alt="Diodenlaser" loading="lazy" decoding="async" />
             <h3>Diodenlaser</h3>
             <p>Dauerhafte Haarentfernung mit modernster Diodenlaser-Technologie. Sanft, effektiv und dauerhaft.</p>
           </article>
           <article class="card">
-            <img src="assets/media-public/images/aquafacial.jpg" alt="Aquafacial" />
+            <img src="assets/media-public/images/aquafacial.jpg" alt="Aquafacial" loading="lazy" decoding="async" />
             <h3>Aquafacial</h3>
             <p>Die Gesichtsbehandlung für strahlende Haut. Reinigt, peelt und versorgt die Haut in einem Schritt.</p>
           </article>
           <article class="card">
-            <img src="assets/media-public/images/yoga.jpg" alt="Head Spa" />
+            <img src="assets/media-public/images/yoga.jpg" alt="Head Spa" loading="lazy" decoding="async" />
             <h3>Head-Spa</h3>
             <p>Wellness-Erlebnis für Kopfhaut und Seele mit Reinigung, Massage und intensiver Pflege.</p>
           </article>
@@ -98,7 +99,7 @@
 
     <section id="about" class="section about">
       <div class="inner about-wrap">
-        <img src="assets/media-public/images/studio.jpg" alt="Studio" />
+        <img src="assets/media-public/images/studio.jpg" alt="Studio" loading="lazy" decoding="async" />
         <div>
           <p class="section-tag">Über uns</p>
           <h2 class="section-title">Schönheit mit Leidenschaft</h2>
@@ -246,7 +247,7 @@
               href="https://maps.google.com/?q=Schlichtener+Str.+91,+73614+Schorndorf"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Adresse in Google Maps oeffnen"
+              aria-label="Adresse in Google Maps öffnen"
             >
               <span class="contact-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -277,22 +278,22 @@
               </span>
               <div>
                 <h3>Instagram</h3>
-                <p>Folge uns fuer neue Treatments, Ergebnisse und Studio-Updates.</p>
+                <p>Folge uns für neue Treatments, Ergebnisse und Studio-Updates.</p>
                 <span class="contact-meta">@beautymoments_schorndorf</span>
               </div>
             </a>
           </div>
         </div>
 
-        <div class="contact-image-placeholder" role="img" aria-label="Cindy Ölke bei der Arbeit in unserem Studio in Schorndorf">
-          <img src="assets/media-public/images/cindy.jpg" alt="Cindy Ölk" />
+        <div class="contact-image-placeholder">
+          <img src="assets/media-public/images/cindy.jpg" alt="Cindy bei der Arbeit im Studio in Schorndorf" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
 
     <section id="retreat" class="section retreat">
       <div class="inner retreat-grid">
-        <img src="assets/media-public/images/headspa.png" alt="Head Spa Retreat" />
+        <img src="assets/media-public/images/headspa.jpg" alt="Head Spa Retreat" loading="lazy" decoding="async" />
         <div>
           <p class="section-tag">Head Spa</p>
           <h2 class="section-title">HeadSpa - Soulful head retreat</h2>
@@ -302,7 +303,7 @@
             Der Doha-Bogen mit diamantgefiltertem Wasser schenkt Balance und Erdung. Zum Abschluss sorgt eine
             intensive Massage von Kopf, Gesicht und Nacken für tiefe Entspannung und Leichtigkeit.
           </p>
-          <p class="retreat-meta"><strong>Duration:</strong> 90 min | <strong>Price:</strong> 149€</p>
+          <p class="retreat-meta"><strong>Dauer:</strong> 90 min | <strong>Preis:</strong> 149€</p>
         </div>
       </div>
     </section>
@@ -310,6 +311,7 @@
     <footer class="footer">
       <div class="footer-brand">BEAUTY MOMENTS</div>
       <a class="footer-link" href="imprint.html">Impressum</a>
+      <p class="made-by">made with ♥ by <a href="https://emmics.de">emmics</a></p>
     </footer>
 
     <script src="scripts/index.js" defer></script>

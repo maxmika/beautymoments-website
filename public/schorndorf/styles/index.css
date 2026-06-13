@@ -42,26 +42,25 @@
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 0.72rem;
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: var(--taupe);
+  gap: 0.7rem;
+  color: var(--accent);
 }
 
 .eyebrow::before {
   content: "";
   width: 28px;
   height: 1px;
-  background: var(--taupe-light);
+  background: var(--accent);
 }
 
 .hero-content h1 {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: var(--serif);
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1.1;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.01em;
   max-width: 15ch;
   margin: 1rem 0;
@@ -86,8 +85,12 @@
   }
 }
 
-.intro {
-  background: var(--ivory);
+@media (prefers-reduced-motion: reduce) {
+  .hero-text-section {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .intro-overlay {
@@ -104,18 +107,17 @@
 
 .intro-overlay .inner {
   pointer-events: auto;
+  text-align: center;
+  padding: 3rem 1.5rem;
 }
 
 .intro-overlay .section-tag {
   color: rgba(255, 255, 255, 0.85);
-}
-
-.center-section-tag {
-    display: block !important;
+  justify-content: center;
 }
 
 .intro-overlay .section-tag::before {
-  background: rgba(196, 168, 130, 0.6);
+  display: none;
 }
 
 .intro-overlay .section-title {
@@ -123,34 +125,30 @@
   text-align: center;
 }
 
-.intro-overlay .inner {
-  text-align: center;
-  padding: 3rem 1.5rem;
-}
-
-@media (max-width: 960px) {
-  .intro-overlay {
-    top: 8vh;
-  }
-}
-
-
 .services {
   background: var(--charcoal);
   color: var(--ivory);
 }
 
+.services .section-tag {
+  color: var(--accent-soft);
+}
+
+.services .section-tag::before {
+  background: var(--accent-soft);
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.4rem;
+  gap: 1.5rem;
   margin-top: 2.5rem;
 }
 
 .card {
-  border: 1px solid rgba(196, 168, 130, 0.2);
-  padding: 1.3rem;
-  background: rgba(250, 250, 247, 0.04);
+  border: 1px solid rgba(250, 249, 247, 0.16);
+  padding: 1.5rem;
+  background: rgba(250, 249, 247, 0.04);
 }
 
 .card img {
@@ -158,18 +156,18 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
   display: block;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .card h3 {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 2.25rem;
-  font-weight: 500;
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 400;
   margin-bottom: 0.7rem;
 }
 
 .card p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
@@ -180,21 +178,20 @@
 .pillars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
-  margin-top: 2.1rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .pillar {
   border: 1px solid var(--ivory-deep);
   background: var(--ivory-dark);
-  padding: 1.15rem;
+  padding: 1.25rem;
 }
 
 .pillar h3 {
-  font-size: 13px;
+  font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 500;
 }
 
 .about {
@@ -204,7 +201,7 @@
 .about-wrap {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: 1.4rem;
+  gap: 1.5rem;
   align-items: stretch;
 }
 
@@ -217,8 +214,9 @@
 }
 
 .about p {
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   line-height: 1.85;
+  color: var(--text-soft);
 }
 
 .testimonials {
@@ -227,36 +225,38 @@
 }
 
 .testimonials .section-tag {
-  color: var(--gold-soft);
+  color: var(--accent-soft);
 }
 
 .testimonials .section-tag::before {
-  background: var(--taupe-light);
+  background: var(--accent-soft);
 }
 
 .quotes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
-  margin-top: 2.2rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 blockquote {
   margin: 0;
-  padding: 1.4rem;
-  border: 1px solid rgba(196, 168, 130, 0.2);
-  background: rgba(250, 250, 247, 0.04);
+  padding: 1.5rem;
+  border: 1px solid rgba(250, 249, 247, 0.16);
+  background: rgba(250, 249, 247, 0.04);
 }
 
 blockquote p {
   margin-bottom: 1rem;
-  font-size: 1.02rem;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
 blockquote cite {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.06em;
+  color: var(--accent-soft);
+  font-style: normal;
 }
 
 .prices {
@@ -266,7 +266,7 @@ blockquote cite {
 .table-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.4rem;
+  gap: 1.5rem;
   margin-top: 2.5rem;
 }
 
@@ -285,17 +285,46 @@ td {
 
 th {
   background: var(--ivory-dark);
-  font-size: 0.98rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
 td {
-  font-size: 1.02rem;
+  font-size: 1rem;
+}
+
+td strong {
+  font-weight: 600;
 }
 
 .retreat {
   background: var(--ivory-dark);
+}
+
+.retreat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.retreat img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+}
+
+.retreat p {
+  font-size: 1.05rem;
+  line-height: 1.82;
+  color: var(--text-soft);
+}
+
+.retreat-meta {
+  margin-top: 1rem;
+  color: var(--charcoal);
 }
 
 .contact {
@@ -304,11 +333,11 @@ td {
 }
 
 .contact .section-tag {
-  color: var(--gold-soft);
+  color: var(--accent-soft);
 }
 
 .contact .section-tag::before {
-  background: var(--taupe-light);
+  background: var(--accent-soft);
 }
 
 .contact .section-title {
@@ -331,7 +360,7 @@ td {
 .contact-tiles {
   display: grid;
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
 .contact-tile {
@@ -339,16 +368,16 @@ td {
   gap: 1rem;
   align-items: flex-start;
   text-decoration: none;
-  border: 1px solid rgba(196, 168, 130, 0.32);
-  background: rgba(250, 250, 247, 0.06);
+  border: 1px solid rgba(250, 249, 247, 0.2);
+  background: rgba(250, 249, 247, 0.06);
   padding: 1.25rem;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .contact-tile:hover {
   transform: translateY(-2px);
-  border-color: rgba(196, 168, 130, 0.6);
-  background: rgba(250, 250, 247, 0.1);
+  border-color: rgba(250, 249, 247, 0.45);
+  background: rgba(250, 249, 247, 0.1);
 }
 
 .contact-icon {
@@ -359,11 +388,8 @@ td {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-  color: var(--charcoal);
-  background: var(--gold-soft);
+  color: var(--ivory);
+  background: var(--accent);
 }
 
 .contact-icon svg {
@@ -378,35 +404,29 @@ td {
 }
 
 .contact-tile h3 {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 2rem;
-  font-weight: 500;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 400;
   margin-bottom: 0.35rem;
 }
 
 .contact-tile p {
-  color: rgba(250, 250, 247, 0.9);
+  color: rgba(250, 249, 247, 0.9);
   margin-bottom: 0.6rem;
 }
 
 .contact-meta {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
-  color: var(--gold-soft);
+  color: var(--accent-soft);
 }
 
 .contact-image-placeholder {
-  border: 1px dashed rgba(196, 168, 130, 0.5);
-  background: linear-gradient(145deg, rgba(250, 250, 247, 0.05), rgba(196, 168, 130, 0.12));
   min-height: 360px;
   height: 100%;
   display: grid;
   place-items: center;
   overflow: hidden;
-  color: rgba(250, 250, 247, 0.7);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
 }
 
 .contact-image-placeholder img {
@@ -415,29 +435,6 @@ td {
   display: block;
   object-fit: cover;
   object-position: center;
-}
-
-.retreat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.3rem;
-  margin-top: 2rem;
-}
-
-.retreat img {
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  object-fit: cover;
-}
-
-.retreat p {
-  font-size: 1.06rem;
-  line-height: 1.82;
-}
-
-.retreat-meta {
-  margin-top: 1rem;
 }
 
 @media (max-width: 960px) {
@@ -455,7 +452,7 @@ td {
     grid-template-columns: 1fr;
   }
 
-  .hero h1 {
+  .hero-content h1 {
     font-size: clamp(2.4rem, 9vw, 3.8rem);
   }
 }

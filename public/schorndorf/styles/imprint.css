@@ -5,46 +5,42 @@
 .legal-container {
   max-width: 980px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 5rem;
+  padding: 4rem max(1.5rem, env(safe-area-inset-right)) 5rem
+    max(1.5rem, env(safe-area-inset-left));
 }
 
 .legal-title {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: var(--serif);
   font-size: clamp(2.4rem, 4.8vw, 4rem);
   font-weight: 400;
   margin-bottom: 0.75rem;
 }
 
-.legal-subtitle {
+.legal-meta {
   color: var(--text-soft);
-  margin-bottom: 2.25rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
 }
 
-.legal-content h2,
-.legal-content h3,
-.legal-content h4 {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 500;
+.legal-section h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+}
+
+.legal-section h3 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
   line-height: 1.25;
   margin-top: 1.6rem;
   margin-bottom: 0.7rem;
 }
 
-.legal-content h2 {
-  font-size: 2rem;
-}
-
-.legal-content h3 {
-  font-size: 1.5rem;
-}
-
-.legal-content h4 {
-  font-size: 1.22rem;
-}
-
 .legal-content p,
-.legal-content li,
-.legal-content div {
+.legal-content li {
   font-size: 1rem;
   line-height: 1.8;
   color: var(--charcoal);
@@ -55,7 +51,7 @@
 }
 
 .legal-content a {
-  color: var(--taupe-dark);
+  color: var(--accent-dark);
   text-underline-offset: 2px;
 }
 
@@ -65,22 +61,17 @@
   margin: 2.25rem 0 1.4rem;
 }
 
-.legal-copy {
-  text-align: center;
-  color: var(--text-soft);
-  margin-bottom: 1.25rem;
-}
-
 @media (max-width: 960px) {
   .legal-container {
-    padding: 3rem 1rem 4rem;
+    padding: 3rem max(1rem, env(safe-area-inset-right)) 4rem
+      max(1rem, env(safe-area-inset-left));
   }
 
-  .legal-content h2 {
+  .legal-section h2 {
     font-size: 1.7rem;
   }
 
-  .legal-content h3 {
+  .legal-section h3 {
     font-size: 1.35rem;
   }
 }
