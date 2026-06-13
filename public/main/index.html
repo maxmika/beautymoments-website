@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Beauty Moments — Kosmetikstudios Schorndorf & Gmünd</title>
+    <meta
+      name="description"
+      content="Beauty Moments — Kosmetikstudios in Schorndorf und Schwäbisch Gmünd. Dauerhafte Haarentfernung, Gesichtsbehandlungen, Headspa, Microneedling und mehr."
+    />
+    <meta name="theme-color" content="#1d1b16" />
+    <style>
+      :root {
+        --ink: #2c2824;
+        --ink-soft: #6b6258;
+        --paper: #faf9f7;
+        --accent-schorndorf: #7d8b6a;
+        --accent-gmuend: #d98a4f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        /* füllt Notch-Bereich und Overscroll, nicht nur den Body */
+        background: #1d1b16;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      h1,
+      h2,
+      .brand,
+      .pane-name {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: normal;
+      }
+
+      /* ---------- Split-Hero ---------- */
+      .split {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100svh;
+        min-height: 560px;
+      }
+
+      .brand {
+        position: absolute;
+        top: max(1.75rem, env(safe-area-inset-top));
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        margin: 0;
+        /* gleicht den Letter-Spacing-Nachlauf hinter dem letzten Buchstaben aus */
+        padding-left: 0.32em;
+        color: #fff;
+        font-size: 1.05rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+        pointer-events: none;
+      }
+
+      .pane {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-decoration: none;
+        outline: none;
+      }
+
+      .pane-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transform: scale(1.02);
+        transition: transform 0.9s cubic-bezier(0.2, 0.6, 0.2, 1);
+      }
+
+      .pane-gmuend .pane-bg {
+        background-image: url("assets/hero-gmuend.svg");
+      }
+
+      .pane-schorndorf .pane-bg {
+        background-image: url("assets/hero-schorndorf.svg");
+      }
+
+      .pane::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 8, 6, 0.38),
+          rgba(10, 8, 6, 0.28) 45%,
+          rgba(10, 8, 6, 0.55)
+        );
+        transition: background-color 0.5s ease;
+      }
+
+      .pane:hover .pane-bg,
+      .pane:focus-visible .pane-bg {
+        transform: scale(1.07);
+      }
+
+      .pane-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+        padding: 2rem;
+        text-align: center;
+        color: #fff;
+      }
+
+      .pane-eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .pane-eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin-right: 0.6em;
+        vertical-align: 1px;
+      }
+
+      .pane-gmuend .pane-eyebrow::before {
+        background: var(--accent-gmuend);
+      }
+
+      .pane-schorndorf .pane-eyebrow::before {
+        background: var(--accent-schorndorf);
+      }
+
+      .pane-name {
+        font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+        letter-spacing: 0.06em;
+        margin: 0;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+      }
+
+      .pane-cta {
+        margin-top: 0.4rem;
+        padding: 0.8rem 1.9rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: background 0.35s ease, color 0.35s ease;
+      }
+
+      .pane:hover .pane-cta,
+      .pane:focus-visible .pane-cta {
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink);
+      }
+
+      .split::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.25);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* ---------- Scroll-Hinweis ---------- */
+      .scroll-hint {
+        position: absolute;
+        left: 50%;
+        bottom: max(1.6rem, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.45rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.74rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .scroll-hint svg {
+        width: 20px;
+        height: 20px;
+        animation: bob 2.2s ease-in-out infinite;
+      }
+
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.85;
+        }
+        50% {
+          transform: translateY(7px);
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-hint svg {
+          animation: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* ---------- Über mich ---------- */
+      .about {
+        padding: 5.5rem max(1.5rem, env(safe-area-inset-right)) 5rem
+          max(1.5rem, env(safe-area-inset-left));
+      }
+
+      .about-inner {
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 3.5rem;
+        align-items: center;
+      }
+
+      .about-eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin: 0 0 1rem;
+      }
+
+      .about h2 {
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        letter-spacing: 0.04em;
+        margin: 0 0 1.25rem;
+      }
+
+      .about p {
+        line-height: 1.7;
+        color: var(--ink-soft);
+        margin: 0 0 1rem;
+      }
+
+      .placeholder-note {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.74rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        border: 1px dashed #c8c0b4;
+      }
+
+      .portrait-placeholder {
+        aspect-ratio: 3 / 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #c8c0b4;
+        background: #f1ede6;
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      /* ---------- Footer ---------- */
+      footer {
+        padding: 2rem max(1.5rem, env(safe-area-inset-right))
+          max(2.5rem, calc(1rem + env(safe-area-inset-bottom)))
+          max(1.5rem, env(safe-area-inset-left));
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+      }
+
+      footer a {
+        color: inherit;
+      }
+
+      .made-by {
+        margin: 1.1rem 0 0;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        color: #cfc7ba;
+      }
+
+      .made-by a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .made-by a:hover {
+        color: var(--ink-soft);
+      }
+
+      /* ---------- Mobil ---------- */
+      @media (max-width: 720px) {
+        .split {
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr;
+        }
+
+        .split::before {
+          left: 0;
+          right: 0;
+          top: 50%;
+          bottom: auto;
+          width: auto;
+          height: 1px;
+        }
+
+        .brand {
+          font-size: 0.85rem;
+        }
+
+        .about-inner {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .portrait-placeholder {
+          max-width: 320px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="split">
+      <p class="brand">BeautyMoments</p>
+
+      <a class="pane pane-gmuend" href="https://gmuend.beautymoments.de" aria-label="Zum Studio Schwäbisch Gmünd">
+        <span class="pane-bg" aria-hidden="true"></span>
+        <span class="pane-content">
+          <span class="pane-eyebrow">Kosmetikstudio</span>
+          <span class="pane-name">Schwäbisch Gmünd</span>
+          <span class="pane-cta">Zum Studio</span>
+        </span>
+      </a>
+
+      <a class="pane pane-schorndorf" href="https://schorndorf.beautymoments.de" aria-label="Zum Studio Schorndorf">
+        <span class="pane-bg" aria-hidden="true"></span>
+        <span class="pane-content">
+          <span class="pane-eyebrow">Kosmetikstudio</span>
+          <span class="pane-name">Schorndorf</span>
+          <span class="pane-cta">Zum Studio</span>
+        </span>
+      </a>
+
+      <a class="scroll-hint" href="#ueber-mich">
+        Über mich
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 9l8 8 8-8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </header>
+
+    <main>
+      <section id="ueber-mich" class="about">
+        <div class="about-inner">
+          <div>
+            <p class="about-eyebrow">Über mich</p>
+            <h2>Hinter Beauty Moments steht Cindy</h2>
+            <p>
+              Zwei Studios, eine Leidenschaft: professionelle Kosmetik- und Beautybehandlungen
+              in Schorndorf und Schwäbisch Gmünd. An dieser Stelle entsteht die persönliche
+              Vorstellung von Cindy — mit ihrem Weg, ihrer Qualifikation und ihrer Arbeit
+              als Ausbilderin.
+            </p>
+            <span class="placeholder-note">Platzhalter — Text &amp; Inhalte folgen</span>
+          </div>
+          <div class="portrait-placeholder" role="img" aria-label="Platzhalter für ein Portrait von Cindy">
+            Portrait folgt
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © Beauty Moments ·
+      <a href="https://schorndorf.beautymoments.de/imprint.html">Impressum &amp; Datenschutz</a>
+      <p class="made-by">made with ♥ by <a href="https://emmics.de">emmics</a></p>
+    </footer>
+  </body>
+</html>
