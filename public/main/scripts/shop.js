@@ -1,23 +1,23 @@
 /*
- * Beauty Moments — Shop-Demo (Test-Run)
+ * Beauty Moments — Shop (Snipcart Test-Modus)
  * ------------------------------------------------------------------
- * EIGENSTÄNDIGE VORSCHAU ohne echte Zahlung. Warenkorb & Checkout sind
- * nachgebaut ("Mock"), damit sich das Einkaufserlebnis auf der Seite fühlen
- * lässt, ohne dass ein Account oder eine Zahlungsanbindung nötig ist.
+ * Storefront (Grid + Detail-Quick-View) wird hier gerendert. Warenkorb &
+ * Checkout übernimmt SNIPCART (echter Test-Modus). Die sichtbaren
+ * "In den Warenkorb"-Buttons lösen die passende statische
+ * .snipcart-add-item-Definition aus shop.html aus (#def-<id>) — so gibt es
+ * keine doppelten Preis-/ID-Angaben und der Snipcart-Crawler kann die Preise
+ * gegen das rohe HTML validieren.
  *
- * Snipcart-Upgrade-Pfad (später, echter Betrieb):
- *   1. <script src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.css">
- *      + <div hidden id="snipcart" data-api-key="TEST_KEY"></div>
- *      + <script src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.js">
- *   2. "In den Warenkorb"-Buttons tragen bereits alle data-item-* Attribute und
- *      die Klasse .snipcart-add-item — Snipcart übernimmt sie dann automatisch.
- *   3. Dieses Mock-Skript (Warenkorb/Checkout) entfernen.
+ * Hinweis: Die Crawler-Validierung funktioniert nur über die öffentliche URL
+ * (beautymoments.de/shop.html). Lokal (localhost) kann Snipcart die Produkt-
+ * URL nicht erreichen — der echte Add-to-Cart-Test läuft erst nach Deploy.
  */
 (function () {
   "use strict";
 
   /* ------------------------------------------------------------------ *
-   * Produktdaten (erfunden, realistisch für Beauty Moments)
+   * Produktdaten — Preise/IDs müssen mit den #def-Buttons in shop.html
+   * übereinstimmen.
    * ------------------------------------------------------------------ */
   const PRODUCTS = [
     {
@@ -29,7 +29,6 @@
       shape: "dropper",
       tint: "#7d8b6a",
       shippable: true,
-      weight: 120,
       category: "Gesichtspflege",
       short: "Intensive Feuchtigkeit und ein ebenmäßiges Hautbild — leicht, schnell einziehend.",
       description:
@@ -52,7 +51,6 @@
       shape: "bottle",
       tint: "#b9c4a8",
       shippable: true,
-      weight: 220,
       category: "Reinigung",
       short: "Löst Make-up und Unreinheiten, ohne die Haut auszutrocknen.",
       description:
@@ -74,7 +72,6 @@
       shape: "jar",
       tint: "#5f6d4e",
       shippable: true,
-      weight: 180,
       category: "Gesichtspflege",
       short: "Nährt die Haut über Nacht und unterstützt die Regeneration.",
       description:
@@ -97,7 +94,6 @@
       shape: "bottle",
       tint: "#9fae8a",
       shippable: true,
-      weight: 260,
       category: "Reinigung",
       short: "Erfrischt, klärt und bereitet die Haut auf die Pflege vor.",
       description:
@@ -119,7 +115,6 @@
       shape: "dropper",
       tint: "#c9a86a",
       shippable: true,
-      weight: 60,
       category: "Lash & Brow",
       short: "Kräftigt und pflegt Wimpern und Augenbrauen sichtbar.",
       description:
@@ -141,7 +136,6 @@
       shape: "bottle",
       tint: "#8a9b76",
       shippable: true,
-      weight: 160,
       category: "Headspa",
       short: "Das Wohlfühl-Ritual aus dem Studio für zuhause.",
       description:
@@ -163,7 +157,6 @@
       shape: "book",
       tint: "#6b6258",
       shippable: false,
-      weight: 0,
       category: "Digital",
       short: "Cindys Routine-Empfehlungen als kompaktes E-Book (sofort verfügbar).",
       description:
@@ -184,7 +177,6 @@
       shape: "course",
       tint: "#7d8b6a",
       shippable: false,
-      weight: 0,
       category: "Ausbildung",
       short: "Lerne das Lash-Lifting von Grund auf — kleine Gruppen, inkl. Material.",
       description:
@@ -194,9 +186,9 @@
       variant: {
         label: "Termin",
         options: [
-          { value: "2026-07-11", label: "Sa, 11. Juli 2026", stock: 2 },
-          { value: "2026-08-22", label: "Sa, 22. August 2026", stock: 4 },
-          { value: "2026-09-19", label: "Sa, 19. September 2026", stock: 4 }
+          { value: "Sa, 11. Juli 2026", label: "Sa, 11. Juli 2026 (noch 2 Plätze)" },
+          { value: "Sa, 22. August 2026", label: "Sa, 22. August 2026" },
+          { value: "Sa, 19. September 2026", label: "Sa, 19. September 2026" }
         ]
       },
       reviews: [
@@ -214,7 +206,6 @@
       shape: "voucher",
       tint: "#d98a4f",
       shippable: false,
-      weight: 0,
       category: "Gutschein",
       short: "Das perfekte Geschenk — einlösbar in beiden Studios.",
       description:
@@ -224,9 +215,9 @@
       variant: {
         label: "Wert",
         options: [
-          { value: "50", label: "50 €", price: 50 },
-          { value: "100", label: "100 €", price: 100 },
-          { value: "150", label: "150 €", price: 150 }
+          { value: "50 €", label: "50 €", price: 50 },
+          { value: "100 €", label: "100 €", price: 100 },
+          { value: "150 €", label: "150 €", price: 150 }
         ]
       },
       reviews: [
@@ -258,12 +249,40 @@
     return p.price;
   }
 
-  const stars = (n) =>
-    "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
+  const stars = (n) => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
 
   /* ------------------------------------------------------------------ *
-   * SVG-Bildgenerator — erzeugt elegante Produkt-Visuals (mehrere
-   * "Ansichten" pro Produkt für die Galerie), ohne externe Bilddateien.
+   * Snipcart-Anbindung: sichtbarer Button löst die statische
+   * #def-<id>-Definition aus (setzt vorher Menge + Variante).
+   * ------------------------------------------------------------------ */
+  function snipcartAdd(productId, opts) {
+    opts = opts || {};
+    const def = document.getElementById("def-" + productId);
+    if (!def) { console.warn("Snipcart-Definition fehlt für", productId); return; }
+    def.setAttribute("data-item-quantity", String(opts.quantity || 1));
+    const p = byId(productId);
+    if (p && p.variant && opts.variantValue != null) {
+      def.setAttribute("data-item-custom1-value", opts.variantValue);
+    }
+    // Snipcart fängt den Klick auf .snipcart-add-item ab. Snipcart lädt async;
+    // ist es noch nicht bereit, holen wir den Klick beim ready-Event nach.
+    if (window.Snipcart) {
+      def.click();
+    } else {
+      document.addEventListener(
+        "snipcart.ready",
+        function once() {
+          document.removeEventListener("snipcart.ready", once);
+          def.click();
+        },
+        { once: true }
+      );
+    }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * SVG-Bildgenerator — elegante Produkt-Visuals (mehrere Ansichten für
+   * die Galerie), ohne externe Bilddateien.
    * ------------------------------------------------------------------ */
   function productImage(p, view) {
     view = view || 0;
@@ -332,66 +351,10 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Warenkorb (localStorage)
-   * ------------------------------------------------------------------ */
-  const STORE_KEY = "bm_shop_cart_v1";
-  let cart = load();
-
-  function load() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
-    catch (e) { return []; }
-  }
-  function save() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (e) {}
-  }
-  function cartCount() {
-    return cart.reduce((s, i) => s + i.qty, 0);
-  }
-  function linePrice(item) {
-    const p = byId(item.productId);
-    return unitPrice(p, item.variant) * item.qty;
-  }
-  function subtotal() {
-    return cart.reduce((s, i) => s + linePrice(i), 0);
-  }
-  function shippingCost() {
-    const hasPhysical = cart.some((i) => byId(i.productId).shippable);
-    if (!hasPhysical) return 0;
-    return subtotal() >= 49 ? 0 : 4.9;
-  }
-
-  function addToCart(productId, variant, qty) {
-    const key = productId + "|" + (variant || "");
-    const existing = cart.find((i) => i.key === key);
-    if (existing) existing.qty += qty;
-    else cart.push({ key, productId, variant: variant || null, qty });
-    save();
-    renderCart();
-    openDrawer();
-    flashBadge();
-  }
-  function setQty(key, qty) {
-    const item = cart.find((i) => i.key === key);
-    if (!item) return;
-    item.qty = Math.max(1, qty);
-    save();
-    renderCart();
-  }
-  function removeItem(key) {
-    cart = cart.filter((i) => i.key !== key);
-    save();
-    renderCart();
-  }
-
-  /* ------------------------------------------------------------------ *
    * DOM-Referenzen
    * ------------------------------------------------------------------ */
   const $ = (sel) => document.querySelector(sel);
   const grid = $("#shop-grid");
-  const badge = $("#cart-badge");
-  const drawer = $("#cart-drawer");
-  const drawerBody = $("#drawer-body");
-  const drawerFoot = $("#drawer-foot");
   const overlay = $("#overlay");
   const modal = $("#modal");
 
@@ -404,9 +367,11 @@
       if (!p.shippable && p.category === "Digital") tags.push("Sofort verfügbar");
       if (p.category === "Ausbildung") tags.push("Kurs");
       if (p.category === "Gutschein") tags.push("Geschenk-Idee");
-      const tag = tags.length
-        ? `<span class="card-tag">${esc(tags[0])}</span>` : "";
-      const priceLabel = p.variant && p.id === "gutschein" ? "ab " : "";
+      const tag = tags.length ? `<span class="card-tag">${esc(tags[0])}</span>` : "";
+      const priceLabel = p.id === "gutschein" ? "ab " : "";
+      const mainBtn = p.variant
+        ? `<button class="btn btn-solid" data-open="${p.id}">Auswählen</button>`
+        : `<button class="btn btn-solid" data-add="${p.id}">In den Warenkorb</button>`;
       return `
         <article class="card" data-id="${p.id}">
           <button class="card-media" data-open="${p.id}" aria-label="Details zu ${esc(p.name)}">
@@ -423,7 +388,7 @@
             </div>
             <div class="card-actions">
               <button class="btn btn-ghost" data-open="${p.id}">Details</button>
-              <button class="btn btn-solid" data-add="${p.id}">${p.variant ? "Auswählen" : "In den Warenkorb"}</button>
+              ${mainBtn}
             </div>
           </div>
         </article>`;
@@ -451,15 +416,14 @@
   }
   function closeModal() {
     modal.classList.remove("open");
-    if (!drawer.classList.contains("open")) overlay.classList.remove("open");
+    overlay.classList.remove("open");
     document.body.classList.remove("noscroll");
   }
 
   function renderModal() {
     const p = byId(modalState.id);
     const price = unitPrice(p, modalState.variant);
-    const avg =
-      p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length;
+    const avg = p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length;
 
     const thumbs = [0, 1, 2]
       .map(
@@ -473,11 +437,10 @@
            <span>${esc(p.variant.label)}</span>
            <select id="variant-select">
              ${p.variant.options
-               .map((o) => {
-                 const out = o.stock != null && o.stock <= 0;
-                 const left = o.stock != null ? ` — noch ${o.stock} Plätze` : "";
-                 return `<option value="${esc(o.value)}" ${o.value === modalState.variant ? "selected" : ""} ${out ? "disabled" : ""}>${esc(o.label)}${esc(left)}</option>`;
-               })
+               .map(
+                 (o) =>
+                   `<option value="${esc(o.value)}" ${o.value === modalState.variant ? "selected" : ""}>${esc(o.label)}</option>`
+               )
                .join("")}
            </select>
          </label>`
@@ -550,206 +513,30 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * Warenkorb-Drawer
-   * ------------------------------------------------------------------ */
-  function renderCart() {
-    if (badge) {
-      const c = cartCount();
-      badge.textContent = c;
-      badge.classList.toggle("show", c > 0);
-    }
-    if (!drawerBody) return;
-
-    if (cart.length === 0) {
-      drawerBody.innerHTML = `<p class="drawer-empty">Dein Warenkorb ist noch leer.</p>`;
-      drawerFoot.innerHTML = "";
-      return;
-    }
-
-    drawerBody.innerHTML = cart
-      .map((item) => {
-        const p = byId(item.productId);
-        const vLabel = item.variant && p.variant
-          ? (p.variant.options.find((o) => String(o.value) === String(item.variant)) || {}).label
-          : null;
-        return `
-        <div class="line">
-          <div class="line-media">${productImage(p, 0)}</div>
-          <div class="line-info">
-            <p class="line-name">${esc(p.name)}</p>
-            ${vLabel ? `<p class="line-variant">${esc(p.variant.label)}: ${esc(vLabel)}</p>` : ""}
-            <div class="qty qty-sm">
-              <button data-line-qty="-1" data-key="${esc(item.key)}" aria-label="weniger">−</button>
-              <span>${item.qty}</span>
-              <button data-line-qty="1" data-key="${esc(item.key)}" aria-label="mehr">+</button>
-            </div>
-          </div>
-          <div class="line-right">
-            <p class="line-price">${euro(linePrice(item))}</p>
-            <button class="line-remove" data-remove="${esc(item.key)}">entfernen</button>
-          </div>
-        </div>`;
-      })
-      .join("");
-
-    const ship = shippingCost();
-    drawerFoot.innerHTML = `
-      <div class="sum-row"><span>Zwischensumme</span><span>${euro(subtotal())}</span></div>
-      <div class="sum-row sum-muted"><span>Versand</span><span>${ship === 0 ? "gratis" : euro(ship)}</span></div>
-      <div class="sum-row sum-total"><span>Gesamt</span><span>${euro(subtotal() + ship)}</span></div>
-      <button class="btn btn-solid btn-block" id="to-checkout">Zur Kasse</button>`;
-  }
-
-  function openDrawer() {
-    drawer.classList.add("open");
-    overlay.classList.add("open");
-    document.body.classList.add("noscroll");
-  }
-  function closeDrawer() {
-    drawer.classList.remove("open");
-    if (!modal.classList.contains("open")) overlay.classList.remove("open");
-    document.body.classList.remove("noscroll");
-  }
-  function flashBadge() {
-    if (!badge) return;
-    badge.classList.remove("pop");
-    void badge.offsetWidth;
-    badge.classList.add("pop");
-  }
-
-  /* ------------------------------------------------------------------ *
-   * Checkout-Overlay (Mock — moderner Look mit Express-Checkout)
-   * ------------------------------------------------------------------ */
-  const checkout = $("#checkout");
-
-  function openCheckout() {
-    closeDrawer();
-    if (cart.length === 0) return;
-    renderCheckout();
-    overlay.classList.add("open");
-    checkout.classList.add("open");
-    document.body.classList.add("noscroll");
-  }
-  function closeCheckout() {
-    checkout.classList.remove("open");
-    overlay.classList.remove("open");
-    document.body.classList.remove("noscroll");
-  }
-
-  function renderCheckout() {
-    const ship = shippingCost();
-    const total = subtotal() + ship;
-    const vat = total - total / 1.19; // Bruttopreise, 19 % enthalten
-
-    const lines = cart
-      .map((item) => {
-        const p = byId(item.productId);
-        return `<div class="co-line"><span>${item.qty}× ${esc(p.name)}</span><span>${euro(linePrice(item))}</span></div>`;
-      })
-      .join("");
-
-    checkout.innerHTML = `
-      <button class="modal-close" data-close-checkout aria-label="Schließen">×</button>
-      <div class="co-grid">
-        <div class="co-main">
-          <h2>Kasse</h2>
-          <p class="co-demo">Vorschau-Modus — es findet <strong>keine echte Zahlung</strong> statt.</p>
-
-          <div class="express">
-            <p class="express-label">Express-Checkout</p>
-            <div class="express-btns">
-              <button class="xbtn xbtn-apple" data-demo-pay>&#63743;&nbsp;Pay</button>
-              <button class="xbtn xbtn-gpay" data-demo-pay><span>G</span>&nbsp;Pay</button>
-              <button class="xbtn xbtn-paypal" data-demo-pay><em>Pay</em>Pal</button>
-            </div>
-          </div>
-          <div class="or-divider"><span>oder mit E-Mail bezahlen</span></div>
-
-          <form id="co-form" class="co-form" novalidate>
-            <label class="field"><span>E-Mail</span><input type="email" required placeholder="du@beispiel.de"></label>
-            <div class="field-row">
-              <label class="field"><span>Vorname</span><input required></label>
-              <label class="field"><span>Nachname</span><input required></label>
-            </div>
-            <label class="field"><span>Straße &amp; Nr.</span><input required></label>
-            <div class="field-row">
-              <label class="field field-sm"><span>PLZ</span><input required></label>
-              <label class="field"><span>Ort</span><input required></label>
-            </div>
-            <button type="submit" class="btn btn-solid btn-block btn-pay">Zahlungspflichtig bestellen · ${euro(total)}</button>
-            <p class="co-fineprint">Demo — mit dem Klick wird nichts gekauft und nichts gesendet.</p>
-          </form>
-        </div>
-
-        <aside class="co-summary">
-          <h3>Bestellübersicht</h3>
-          <div class="co-lines">${lines}</div>
-          <div class="sum-row sum-muted"><span>Versand</span><span>${ship === 0 ? "gratis" : euro(ship)}</span></div>
-          <div class="sum-row sum-total"><span>Gesamt</span><span>${euro(total)}</span></div>
-          <p class="co-vat">inkl. 19 % MwSt. (${euro(vat)})</p>
-        </aside>
-      </div>`;
-  }
-
-  function showSuccess() {
-    checkout.innerHTML = `
-      <div class="co-success">
-        <div class="co-check">✓</div>
-        <h2>Geschafft — im echten Shop wärst du jetzt fertig.</h2>
-        <p>Das war eine <strong>Vorschau ohne echte Zahlung</strong>. Im Live-Betrieb
-        würden hier Zahlung, Bestellbestätigung per E-Mail und (bei Versand)
-        Sendungsverfolgung über Snipcart laufen.</p>
-        <button class="btn btn-solid" id="success-close">Zurück zum Shop</button>
-      </div>`;
-    cart = [];
-    save();
-    renderCart();
-  }
-
-  /* ------------------------------------------------------------------ *
    * Event-Delegation
    * ------------------------------------------------------------------ */
   document.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-open],[data-add],[data-close-modal],[data-view],[data-qty],.btn-add-detail,[data-line-qty],[data-remove],#to-checkout,[data-close-checkout],[data-demo-pay],#success-close,#cart-toggle,[data-close-overlay]");
+    const t = e.target.closest("[data-open],[data-add],[data-close-modal],[data-view],[data-qty],.btn-add-detail");
     if (!t) return;
 
-    if (t.hasAttribute("data-open")) { openModal(t.getAttribute("data-open")); return; }
-    if (t.hasAttribute("data-add")) {
-      const p = byId(t.getAttribute("data-add"));
-      if (p.variant) openModal(p.id);
-      else addToCart(p.id, null, 1);
-      return;
-    }
-    if (t.hasAttribute("data-close-modal")) { closeModal(); return; }
-    if (t.hasAttribute("data-view")) {
-      modalState.view = +t.getAttribute("data-view");
-      renderModal();
-      return;
-    }
-    if (t.hasAttribute("data-qty")) {
-      modalState.qty = Math.max(1, modalState.qty + +t.getAttribute("data-qty"));
-      renderModal();
-      return;
-    }
     if (t.classList.contains("btn-add-detail")) {
-      addToCart(modalState.id, modalState.variant, modalState.qty);
+      const p = byId(modalState.id);
+      let variantValue = null;
+      if (p.variant) {
+        const opt = p.variant.options.find((o) => String(o.value) === String(modalState.variant));
+        variantValue = opt ? opt.value : null;
+      }
+      snipcartAdd(modalState.id, { quantity: modalState.qty, variantValue: variantValue });
       closeModal();
       return;
     }
-    if (t.hasAttribute("data-line-qty")) {
-      const key = t.getAttribute("data-key");
-      const item = cart.find((i) => i.key === key);
-      if (item) setQty(key, item.qty + +t.getAttribute("data-line-qty"));
-      return;
-    }
-    if (t.hasAttribute("data-remove")) { removeItem(t.getAttribute("data-remove")); return; }
-    if (t.id === "to-checkout") { openCheckout(); return; }
-    if (t.hasAttribute("data-close-checkout")) { closeCheckout(); return; }
-    if (t.hasAttribute("data-demo-pay")) { showSuccess(); return; }
-    if (t.id === "success-close") { closeCheckout(); return; }
-    if (t.id === "cart-toggle") { renderCart(); openDrawer(); return; }
-    if (t.hasAttribute("data-close-overlay")) {
-      closeModal(); closeDrawer(); closeCheckout();
+    if (t.hasAttribute("data-add")) { snipcartAdd(t.getAttribute("data-add"), { quantity: 1 }); return; }
+    if (t.hasAttribute("data-open")) { openModal(t.getAttribute("data-open")); return; }
+    if (t.hasAttribute("data-close-modal")) { closeModal(); return; }
+    if (t.hasAttribute("data-view")) { modalState.view = +t.getAttribute("data-view"); renderModal(); return; }
+    if (t.hasAttribute("data-qty")) {
+      modalState.qty = Math.max(1, modalState.qty + +t.getAttribute("data-qty"));
+      renderModal();
       return;
     }
   });
@@ -762,28 +549,16 @@
     }
   });
 
-  // Checkout-Formular absenden -> Demo-Erfolg
-  document.addEventListener("submit", (e) => {
-    if (e.target.id === "co-form") {
-      e.preventDefault();
-      if (e.target.checkValidity()) showSuccess();
-      else e.target.reportValidity();
-    }
-  });
-
-  // ESC schließt Overlays
+  // ESC schließt das Detail-Modal
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { closeModal(); closeDrawer(); closeCheckout(); }
+    if (e.key === "Escape") closeModal();
   });
 
-  // Klick aufs Overlay (Hintergrund) schließt
-  if (overlay) overlay.addEventListener("click", () => {
-    closeModal(); closeDrawer(); closeCheckout();
-  });
+  // Klick auf den Hintergrund schließt das Detail-Modal
+  if (overlay) overlay.addEventListener("click", closeModal);
 
   /* ------------------------------------------------------------------ *
    * Init
    * ------------------------------------------------------------------ */
   renderGrid();
-  renderCart();
 })();

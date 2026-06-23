@@ -90,8 +90,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 .cart-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
 
-#cart-badge {
-  display: none;
+.cart-badge {
+  display: inline-block;
   min-width: 20px;
   height: 20px;
   padding: 0 5px;
@@ -102,9 +102,8 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 20px;
   text-align: center;
 }
-#cart-badge.show { display: inline-block; }
-#cart-badge.pop { animation: pop 0.35s ease; }
-@keyframes pop { 0% { transform: scale(0.5); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+/* Snipcart befüllt .snipcart-items-count; leer = kein Artikel -> ausblenden */
+.cart-badge:empty { display: none; }
 
 /* ---------- Demo-Banner ---------- */
 .demo-banner {

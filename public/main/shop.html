@@ -6,33 +6,25 @@
     <title>Shop — Beauty Moments</title>
     <meta
       name="description"
-      content="Beauty Moments Shop — ausgewählte Pflegeprodukte, Gutscheine und Kurse. (Vorschau / Demo)"
+      content="Beauty Moments Shop — ausgewählte Pflegeprodukte, Gutscheine und Kurse. (Test-Modus)"
     />
     <meta name="theme-color" content="#2c2824" />
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="styles/shop.css" />
-
-    <!--
-      SNIPCART-UPGRADE (späterer Echtbetrieb): hier später einsetzen
-        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.css" />
-      und vor </body>:
-        <div hidden id="snipcart" data-api-key="DEIN_TEST_PUBLIC_KEY"></div>
-        <script src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.js"></script>
-      Die Buy-Buttons sind bereits Snipcart-kompatibel vorbereitet; das Mock-Skript
-      (scripts/shop.js) wird dann entfernt.
-    -->
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
   </head>
   <body>
     <div class="demo-banner">
-      <strong>Vorschau / Demo</strong> — so würde sich der Shop anfühlen. Es findet keine echte Zahlung statt.
+      <strong>Test-Modus</strong> — echter Snipcart-Checkout zum Ausprobieren. Bezahlung mit Testkarte
+      <strong>4242&nbsp;4242&nbsp;4242&nbsp;4242</strong> (beliebiges Datum/CVC) — es wird kein echtes Geld abgebucht.
     </div>
 
     <nav class="shop-nav" aria-label="Shop-Navigation">
       <a class="nav-back" href="index.html">← Zur Startseite</a>
       <span class="nav-brand">Beauty Moments</span>
-      <button class="cart-btn" id="cart-toggle">
-        Warenkorb <span id="cart-badge">0</span>
+      <button class="cart-btn snipcart-checkout" id="cart-toggle" type="button">
+        Warenkorb <span class="cart-badge snipcart-items-count" id="cart-badge"></span>
       </button>
     </nav>
 
@@ -48,25 +40,118 @@
     <main id="shop-grid" class="shop-grid" aria-label="Produkte"></main>
 
     <footer class="shop-footer">
-      © Beauty Moments · Demo-Vorschau ohne echte Bestellfunktion
+      © Beauty Moments · Test-Shop (Snipcart) — noch keine echten Bestellungen
     </footer>
 
-    <!-- Overlays -->
+    <!-- Overlay + Detail-Modal (Quick-View bleibt eigenes UI) -->
     <div class="overlay" id="overlay"></div>
-
-    <aside class="drawer" id="cart-drawer" aria-label="Warenkorb">
-      <div class="drawer-head">
-        <h2>Warenkorb</h2>
-        <button class="modal-close" data-close-overlay aria-label="Schließen">×</button>
-      </div>
-      <div class="drawer-body" id="drawer-body"></div>
-      <div class="drawer-foot" id="drawer-foot"></div>
-    </aside>
-
     <div class="modal" id="modal" tabindex="-1" role="dialog" aria-modal="true" aria-label="Produktdetails"></div>
 
-    <div class="checkout" id="checkout" role="dialog" aria-modal="true" aria-label="Kasse"></div>
+    <!--
+      ============================================================
+      SNIPCART-PRODUKTDEFINITIONEN (statisch & versteckt)
+      ------------------------------------------------------------
+      Snipcart validiert Preise, indem es data-item-url SERVERSEITIG
+      crawlt und dabei nur rohes HTML liest (kein JS). Deshalb steht
+      hier pro Produkt eine echte .snipcart-add-item-Definition als
+      Quelle der Wahrheit. Die sichtbaren "In den Warenkorb"-Buttons
+      (von shop.js erzeugt) lösen per Klick die passende Definition aus.
+      Preise/IDs müssen mit den Daten in scripts/shop.js übereinstimmen.
+      ============================================================
+    -->
+    <div id="snipcart-defs" hidden aria-hidden="true">
+      <button class="snipcart-add-item" id="def-gesichtsserum"
+        data-item-id="gesichtsserum"
+        data-item-name="Aufbauendes Gesichtsserum"
+        data-item-price="39.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="120"
+        data-item-description="Hyaluron &amp; Niacinamid · 30 ml"></button>
+
+      <button class="snipcart-add-item" id="def-reinigungsmilch"
+        data-item-id="reinigungsmilch"
+        data-item-name="Sanfte Reinigungsmilch"
+        data-item-price="24.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="220"
+        data-item-description="für jeden Hauttyp · 150 ml"></button>
+
+      <button class="snipcart-add-item" id="def-nachtcreme"
+        data-item-id="nachtcreme"
+        data-item-name="Regenerierende Nachtcreme"
+        data-item-price="44.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="180"
+        data-item-description="reichhaltig · 50 ml"></button>
+
+      <button class="snipcart-add-item" id="def-mizellen-tonic"
+        data-item-id="mizellen-tonic"
+        data-item-name="Mizellen-Tonic"
+        data-item-price="19.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="260"
+        data-item-description="klärend &amp; beruhigend · 200 ml"></button>
+
+      <button class="snipcart-add-item" id="def-lashbrow-serum"
+        data-item-id="lashbrow-serum"
+        data-item-name="Lash &amp; Brow Serum"
+        data-item-price="34.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="60"
+        data-item-description="für Wimpern &amp; Brauen · 5 ml"></button>
+
+      <button class="snipcart-add-item" id="def-headspa-oel"
+        data-item-id="headspa-oel"
+        data-item-name="Headspa Kopfhaut-Öl"
+        data-item-price="29.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-weight="160"
+        data-item-description="beruhigend · 100 ml"></button>
+
+      <button class="snipcart-add-item" id="def-pflege-guide"
+        data-item-id="pflege-guide"
+        data-item-name="Hautpflege-Guide für Zuhause (PDF)"
+        data-item-price="9.90"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-shippable="false"
+        data-item-description="digitaler Download"></button>
+
+      <button class="snipcart-add-item" id="def-lash-lifting-kurs"
+        data-item-id="lash-lifting-kurs"
+        data-item-name="Lash-Lifting Basiskurs"
+        data-item-price="249.00"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-shippable="false"
+        data-item-description="Tagesseminar in Schorndorf"
+        data-item-custom1-name="Termin"
+        data-item-custom1-options="Sa, 11. Juli 2026|Sa, 22. August 2026|Sa, 19. September 2026"></button>
+
+      <button class="snipcart-add-item" id="def-gutschein"
+        data-item-id="gutschein"
+        data-item-name="Wertgutschein"
+        data-item-price="50.00"
+        data-item-url="https://beautymoments.de/shop.html"
+        data-item-shippable="false"
+        data-item-description="einlösbar in beiden Studios"
+        data-item-custom1-name="Wert"
+        data-item-custom1-options="50 €|100 €[+50.00]|150 €[+100.00]"></button>
+    </div>
 
     <script src="scripts/shop.js"></script>
+
+    <!-- ============ Snipcart v3 (kanonische Installation) ============ -->
+    <!--
+      Währung NICHT clientseitig erzwingen. Ein hier gesetztes currency, das im
+      Account nicht konfiguriert ist, lässt /api/cart mit HTTP 500 fehlschlagen
+      (Endlos-Spinner "Wir erstellen Ihren Warenkorb…"). Standardwährung stattdessen
+      im Snipcart-Dashboard auf EUR stellen.
+    -->
+    <div
+      hidden
+      id="snipcart"
+      data-api-key="MzA1OWJmZjYtZWIzNS00ZjUyLWEyNDktNDkxM2FkN2I3M2M4NjM5MTc4NDMwMjY4NTk4MjU5"
+      data-config-modal-style="side"
+    ></div>
+    <script async src="https://cdn.snipcart.com/themes/v3.0/default/snipcart.js"></script>
   </body>
 </html>
