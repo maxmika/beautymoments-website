@@ -70,6 +70,36 @@
         pointer-events: none;
       }
 
+      /* ---------- Shop-Einstieg ---------- */
+      .shop-link {
+        position: absolute;
+        top: max(1.5rem, env(safe-area-inset-top));
+        right: max(1.25rem, env(safe-area-inset-right));
+        z-index: 4;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        color: #fff;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .shop-link:hover,
+      .shop-link:focus-visible {
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink);
+      }
+
       .pane {
         position: relative;
         display: flex;
@@ -362,6 +392,7 @@
   <body>
     <header class="split">
       <p class="brand">BeautyMoments</p>
+      <a class="shop-link" href="shop.html">Zum Shop</a>
 
       <a class="pane pane-gmuend" href="https://gmuend.beautymoments.de" aria-label="Zum Studio Schwäbisch Gmünd">
         <span class="pane-bg" aria-hidden="true"></span>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Shop — Beauty Moments</title>
+    <meta
+      name="description"
+      content="Beauty Moments Shop — ausgewählte Pflegeprodukte, Gutscheine und Kurse. (Vorschau / Demo)"
+    />
+    <meta name="theme-color" content="#2c2824" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles/shop.css" />
+
+    <!--
+      SNIPCART-UPGRADE (späterer Echtbetrieb): hier später einsetzen
+        <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.css" />
+      und vor </body>:
+        <div hidden id="snipcart" data-api-key="DEIN_TEST_PUBLIC_KEY"></div>
+        <script src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.js"></script>
+      Die Buy-Buttons sind bereits Snipcart-kompatibel vorbereitet; das Mock-Skript
+      (scripts/shop.js) wird dann entfernt.
+    -->
+  </head>
+  <body>
+    <div class="demo-banner">
+      <strong>Vorschau / Demo</strong> — so würde sich der Shop anfühlen. Es findet keine echte Zahlung statt.
+    </div>
+
+    <nav class="shop-nav" aria-label="Shop-Navigation">
+      <a class="nav-back" href="index.html">← Zur Startseite</a>
+      <span class="nav-brand">Beauty Moments</span>
+      <button class="cart-btn" id="cart-toggle">
+        Warenkorb <span id="cart-badge">0</span>
+      </button>
+    </nav>
+
+    <header class="shop-intro">
+      <p class="eyebrow">Unser Shop</p>
+      <h1>Pflege, Gutscheine &amp; Kurse</h1>
+      <p>
+        Eine kleine, kuratierte Auswahl — die Produkte, die Cindy in den Studios
+        nutzt und empfiehlt, dazu Wertgutscheine und Termine für Kurse.
+      </p>
+    </header>
+
+    <main id="shop-grid" class="shop-grid" aria-label="Produkte"></main>
+
+    <footer class="shop-footer">
+      © Beauty Moments · Demo-Vorschau ohne echte Bestellfunktion
+    </footer>
+
+    <!-- Overlays -->
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="drawer" id="cart-drawer" aria-label="Warenkorb">
+      <div class="drawer-head">
+        <h2>Warenkorb</h2>
+        <button class="modal-close" data-close-overlay aria-label="Schließen">×</button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+      <div class="drawer-foot" id="drawer-foot"></div>
+    </aside>
+
+    <div class="modal" id="modal" tabindex="-1" role="dialog" aria-modal="true" aria-label="Produktdetails"></div>
+
+    <div class="checkout" id="checkout" role="dialog" aria-modal="true" aria-label="Kasse"></div>
+
+    <script src="scripts/shop.js"></script>
+  </body>
+</html>
