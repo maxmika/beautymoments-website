@@ -9,6 +9,9 @@
       content="Beauty Moments — Kosmetikstudios in Schorndorf und Schwäbisch Gmünd. Dauerhafte Haarentfernung, Gesichtsbehandlungen, Headspa, Microneedling und mehr."
     />
     <meta name="theme-color" content="#1d1b16" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Licorice&family=Manrope:wght@400;500;600;700&display=swap" />
     <style>
       :root {
         --ink: #2c2824;
@@ -30,7 +33,7 @@
 
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, sans-serif;
+        font-family: "Manrope", system-ui, -apple-system, sans-serif;
         background: var(--paper);
         color: var(--ink);
       }
@@ -70,34 +73,14 @@
         pointer-events: none;
       }
 
-      /* ---------- Shop-Einstieg ---------- */
-      .shop-link {
-        position: absolute;
-        top: max(1.5rem, env(safe-area-inset-top));
-        right: max(1.25rem, env(safe-area-inset-right));
-        z-index: 4;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.6rem 1.2rem;
-        color: #fff;
-        font-size: 0.78rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+      /* ---------- Versteckter Shop-Link (Footer) ---------- */
+      .shop-hidden {
+        display: block;
+        margin-top: 0.8rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        color: var(--paper); /* = Seitenhintergrund -> praktisch unsichtbar */
         text-decoration: none;
-        border: 1px solid rgba(255, 255, 255, 0.85);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
-        transition: background 0.3s ease, color 0.3s ease;
-      }
-
-      .shop-link:hover,
-      .shop-link:focus-visible {
-        background: rgba(255, 255, 255, 0.92);
-        color: var(--ink);
       }
 
       .pane {
@@ -301,30 +284,79 @@
         margin: 0 0 1rem;
       }
 
-      .placeholder-note {
-        display: inline-block;
-        margin-top: 0.5rem;
-        padding: 0.35rem 0.75rem;
-        font-size: 0.74rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--ink-soft);
-        border: 1px dashed #c8c0b4;
+      .about .signature {
+        font-family: "Licorice", "Segoe Script", cursive;
+        font-size: 3.1rem;
+        line-height: 1;
+        color: var(--ink);
+        margin: 0.5rem 0 0;
       }
 
-      .portrait-placeholder {
+      .about .cert-badge {
+        display: inline-block;
+        margin: 1rem 0 0;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        border: 1px solid #d9cfc0;
+        border-radius: 999px;
+      }
+
+      .portrait {
         aspect-ratio: 3 / 4;
+        overflow: hidden;
+      }
+
+      .portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ---------- Warum Beauty Moments ---------- */
+      .why-band {
+        background: #f1ede6;
+        padding: 4rem max(1.5rem, env(safe-area-inset-right)) 4.5rem
+          max(1.5rem, env(safe-area-inset-left));
+      }
+
+      .why-band-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .why-band h2 {
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        letter-spacing: 0.04em;
+        margin: 0.5rem 0 1.8rem;
+      }
+
+      .why-checks {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem 1.8rem;
+      }
+
+      .why-checks li {
         display: flex;
         align-items: center;
-        justify-content: center;
-        border: 1px dashed #c8c0b4;
-        background: #f1ede6;
+        gap: 0.5rem;
         color: var(--ink-soft);
-        font-size: 0.8rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 1rem;
+        font-size: 0.98rem;
+      }
+
+      .why-checks li::before {
+        content: "✓";
+        color: #8a7e66;
+        font-weight: 700;
       }
 
       /* ---------- Footer ---------- */
@@ -382,7 +414,7 @@
           gap: 2.5rem;
         }
 
-        .portrait-placeholder {
+        .portrait {
           max-width: 320px;
           margin: 0 auto;
         }
@@ -392,7 +424,6 @@
   <body>
     <header class="split">
       <p class="brand">BeautyMoments</p>
-      <a class="shop-link" href="shop.html">Zum Shop</a>
 
       <a class="pane pane-gmuend" href="https://gmuend.beautymoments.de" aria-label="Zum Studio Schwäbisch Gmünd">
         <span class="pane-bg" aria-hidden="true"></span>
@@ -427,16 +458,42 @@
             <p class="about-eyebrow">Über mich</p>
             <h2>Hinter Beauty Moments steht Cindy</h2>
             <p>
-              Zwei Studios, eine Leidenschaft: professionelle Kosmetik- und Beautybehandlungen
-              in Schorndorf und Schwäbisch Gmünd. An dieser Stelle entsteht die persönliche
-              Vorstellung von Cindy — mit ihrem Weg, ihrer Qualifikation und ihrer Arbeit
-              als Ausbilderin.
+              Schönheit bedeutet für mich weit mehr als ein schönes Hautbild. Es geht darum,
+              sich wohlzufühlen, Selbstvertrauen auszustrahlen und sich bewusst Zeit für sich
+              selbst zu nehmen.
             </p>
-            <span class="placeholder-note">Platzhalter — Text &amp; Inhalte folgen</span>
+            <p>
+              Mit Beauty Moments habe ich einen Ort geschaffen, an dem professionelle Kosmetik
+              auf persönliche Betreuung trifft. Mein Anspruch ist es, jede Kundin individuell
+              zu beraten und Behandlungen anzubieten, die sichtbar wirken und gleichzeitig
+              entspannend sind.
+            </p>
+            <p>
+              Regelmäßige Weiterbildungen und moderne Behandlungsmethoden ermöglichen es mir,
+              stets auf dem neuesten Stand zu arbeiten und meinen Kundinnen die bestmöglichen
+              Ergebnisse zu bieten.
+            </p>
+            <p>Ich freue mich darauf, dich persönlich kennenzulernen.</p>
+            <p class="signature">Deine Cindy</p>
+            <p class="cert-badge">NiSV-zertifiziert · seit 2019</p>
           </div>
-          <div class="portrait-placeholder" role="img" aria-label="Platzhalter für ein Portrait von Cindy">
-            Portrait folgt
+          <div class="portrait">
+            <img src="assets/cindy.jpg" alt="Cindy, Inhaberin von Beauty Moments" loading="lazy" decoding="async" />
           </div>
+        </div>
+      </section>
+
+      <section class="why-band" aria-label="Warum Beauty Moments">
+        <div class="why-band-inner">
+          <p class="about-eyebrow">Warum Beauty Moments?</p>
+          <h2>Bei uns stehst du im Mittelpunkt</h2>
+          <ul class="why-checks">
+            <li>Individuelle Hautanalyse</li>
+            <li>Moderne Technologien</li>
+            <li>Persönliche Betreuung</li>
+            <li>Entspannte Wohlfühlatmosphäre</li>
+            <li>Sichtbare Ergebnisse</li>
+          </ul>
         </div>
       </section>
     </main>
@@ -444,6 +501,7 @@
     <footer>
       © Beauty Moments ·
       <a href="https://schorndorf.beautymoments.de/imprint.html">Impressum &amp; Datenschutz</a>
+      <a class="shop-hidden" href="shop.html">Zum Shop</a>
       <p class="made-by">made with ♥ by <a href="https://emmics.de">emmics</a></p>
     </footer>
   </body>

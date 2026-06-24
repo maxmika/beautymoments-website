@@ -4,65 +4,273 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Beauty Moments Gmünd — Website in Vorbereitung</title>
-    <meta name="description" content="Beauty Moments Gmünd — die neue Website ist in Vorbereitung." />
+    <meta name="description" content="Beauty Moments in Schwäbisch Gmünd — individuelle Gesichtspflege, Microneedling, Lash & Browlifting. Die Website ist in Vorbereitung." />
     <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#faf9f7" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" />
     <style>
-      html {
-        /* füllt Notch-Bereich und Overscroll, nicht nur den Body */
-        background: #faf9f7;
+      :root {
+        --ink: #2c2824;
+        --ink-soft: #6b6258;
+        --paper: #faf9f7;
+        --paper-2: #f4efe9;
+        --accent: #d98a4f;
+        --accent-soft: #f0d9c4;
+        --line: #ece4da;
+        --serif: Georgia, "Times New Roman", serif;
+        --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
       }
+
+      * { box-sizing: border-box; }
+
+      html { background: var(--paper); scroll-behavior: smooth; }
+
       body {
         margin: 0;
-        min-height: 100svh;
+        font-family: var(--sans);
+        color: var(--ink);
+        background: var(--paper);
+        line-height: 1.7;
+      }
+
+      h1, h2 { font-family: var(--serif); font-weight: 400; margin: 0; }
+      p { margin: 0; }
+
+      .inner {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 0 max(1.5rem, env(safe-area-inset-right)) 0 max(1.5rem, env(safe-area-inset-left));
+      }
+
+      .topbar {
+        text-align: center;
+        padding: max(1.6rem, env(safe-area-inset-top)) 1.5rem 0;
+      }
+
+      .brand {
+        font-family: var(--serif);
+        font-size: 1.4rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .brand span {
+        display: block;
+        font-family: var(--sans);
+        font-size: 0.66rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-top: 0.35rem;
+      }
+
+      .prep-badge {
+        display: inline-block;
+        margin-top: 1.1rem;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-radius: 999px;
+      }
+
+      .eyebrow {
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-family: Georgia, "Times New Roman", serif;
-        background: #faf9f7;
-        color: #2c2824;
-        text-align: center;
+        gap: 0.7rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
       }
-      main {
-        padding: 2rem;
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
       }
-      h1 {
-        font-size: 1.8rem;
-        font-weight: normal;
-        letter-spacing: 0.08em;
-        margin: 0 0 0.75rem;
+
+      .hero {
+        padding: 3.5rem 0 3rem;
       }
-      p {
-        font-family: system-ui, sans-serif;
-        font-size: 1rem;
-        color: #6b6258;
+
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        line-height: 1.15;
+        margin: 1rem 0 1.4rem;
+        max-width: 18ch;
+      }
+
+      .hero p {
+        color: var(--ink-soft);
+        font-size: 1.05rem;
+        max-width: 64ch;
+        margin-bottom: 1rem;
+      }
+
+      .suited {
+        margin-top: 1.8rem;
+      }
+
+      .suited > span {
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--accent);
+        margin-bottom: 0.9rem;
+      }
+
+      .suited ul {
+        list-style: none;
         margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem 1.6rem;
       }
-      .made-by {
-        position: fixed;
+
+      .suited li {
+        position: relative;
+        padding-left: 1.2rem;
+        color: var(--ink-soft);
+      }
+
+      .suited li::before {
+        content: "";
+        position: absolute;
         left: 0;
-        right: 0;
-        bottom: max(1rem, env(safe-area-inset-bottom));
-        padding: 0 max(1rem, env(safe-area-inset-right)) 0 max(1rem, env(safe-area-inset-left));
+        top: 0.62em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .block {
+        border-top: 1px solid var(--line);
+        padding: 3rem 0;
+      }
+
+      .block h2 {
+        font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+        margin: 0.8rem 0 1.3rem;
+      }
+
+      .block p {
+        color: var(--ink-soft);
+        margin-bottom: 1rem;
+        max-width: 66ch;
+      }
+
+      .closing {
+        font-family: var(--serif);
+        font-size: 1.3rem;
+        color: var(--ink);
+        margin-top: 1.4rem;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
         text-align: center;
-        font-family: system-ui, sans-serif;
+        padding: 2.2rem 1.5rem max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom)));
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+      }
+
+      footer a { color: inherit; }
+
+      .made-by {
+        margin: 1rem 0 0;
         font-size: 0.68rem;
         letter-spacing: 0.06em;
-        color: #d9d3c8;
+        color: #cfc7ba;
       }
-      .made-by a {
-        color: inherit;
-        text-decoration: none;
+
+      .made-by a { color: inherit; text-decoration: none; }
+      .made-by a:hover { color: var(--ink-soft); }
+
+      @media (max-width: 640px) {
+        .suited ul { grid-template-columns: 1fr; }
       }
-      .made-by a:hover {
-        color: #6b6258;
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Beauty Moments Gmünd</h1>
-      <p>Website in Vorbereitung</p>
-    </main>
-    <p class="made-by">made with ♥ by <a href="https://emmics.de">emmics</a></p>
+    <div class="topbar">
+      <div class="brand">Beauty Moments<span>Kosmetikstudio Schwäbisch Gmünd</span></div>
+      <div class="prep-badge">Seite in Vorbereitung</div>
+    </div>
+
+    <section class="hero">
+      <div class="inner">
+        <p class="eyebrow">Gesichtsbehandlung &amp; Pflege</p>
+        <h1>Individuelle Pflege für deine Haut</h1>
+        <p>
+          Jede Haut ist einzigartig und hat ihre ganz eigenen Bedürfnisse. Deshalb nehmen wir uns
+          Zeit, deine Haut kennenzulernen und die Behandlung individuell auf dich abzustimmen. Unser
+          Ziel ist es, nicht nur dein Hautbild zu verbessern, sondern dir auch einen Moment der
+          Entspannung und des Wohlbefindens zu schenken.
+        </p>
+        <p>
+          Mit hochwertigen Produkten und auf deine Haut abgestimmten Behandlungsmethoden unterstützen
+          wir deine Haut dabei, ihre natürliche Balance wiederzufinden und ihre Ausstrahlung zu
+          entfalten. Ob intensive Feuchtigkeit, sanfte Reinigung oder regenerierende Pflege – jede
+          Behandlung wird mit viel Sorgfalt und Aufmerksamkeit durchgeführt.
+        </p>
+
+        <div class="suited">
+          <span>Ideal bei</span>
+          <ul>
+            <li>Trockener und feuchtigkeitsarmer Haut</li>
+            <li>Unreiner oder zu Unreinheiten neigender Haut</li>
+            <li>Empfindlicher und sensibler Haut</li>
+            <li>Pigmentstörungen und ungleichmäßigem Hautbild</li>
+            <li>Ersten Fältchen und nachlassender Spannkraft</li>
+            <li>Fahlem und müde wirkendem Teint</li>
+            <li>Stressbedingten Hautproblemen</li>
+            <li>Dem Wunsch nach frischer, gesunder Ausstrahlung</li>
+          </ul>
+        </div>
+
+        <p class="closing">
+          Gönn deiner Haut eine Auszeit und lass dich von uns auf dem Weg zu einem gepflegten,
+          strahlenden Hautbild begleiten.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="inner">
+        <p class="eyebrow">Lash &amp; Brow</p>
+        <h2>Lash &amp; Browlifting</h2>
+        <p>
+          Manchmal sind es die kleinen Details, die den größten Unterschied machen. Mit einem
+          Lash &amp; Browlifting verleihen wir deinem Blick mehr Ausdruck und unterstreichen deine
+          natürliche Schönheit – ganz ohne künstliche Wimpern oder tägliches Styling.
+        </p>
+        <p>
+          Beim Lashlifting erhalten deine natürlichen Wimpern einen wunderschönen Schwung für einen
+          offenen, strahlenden Blick. Beim Browlifting werden deine Augenbrauen individuell vermessen,
+          in Form gebracht und auf Wunsch gewachst sowie mit Hybridfarbe veredelt – für ein besonders
+          harmonisches und gepflegtes Ergebnis.
+        </p>
+        <p class="closing">Für einen ausdrucksstarken Blick – und das jeden Tag.</p>
+      </div>
+    </section>
+
+    <footer>
+      © Beauty Moments · Schwäbisch Gmünd ·
+      <a href="https://schorndorf.beautymoments.de/imprint.html">Impressum &amp; Datenschutz</a>
+      <p class="made-by">made with ♥ by <a href="https://emmics.de">emmics</a></p>
+    </footer>
   </body>
 </html>

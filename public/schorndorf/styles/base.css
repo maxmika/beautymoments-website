@@ -9,7 +9,8 @@
   --accent-dark: #5f6d4e;
   --white: #ffffff;
   --serif: Georgia, "Times New Roman", serif;
-  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script: "Licorice", "Segoe Script", cursive;
   --max: 1200px;
 }
 

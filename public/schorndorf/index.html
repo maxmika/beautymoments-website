@@ -6,16 +6,22 @@
     <title>Beauty Moments Schorndorf — Kosmetikstudio</title>
     <meta
       name="description"
-      content="Dein Kosmetikstudio in Schorndorf. NiSV zertifiziert seit 2019. Head-Spa, Diodenlaser, Aquafacial und Microneedling."
+      content="Dein Kosmetikstudio in Schorndorf. NiSV zertifiziert seit 2019. Gesichtsbehandlungen, dauerhafte Haarentfernung, HeadSpa, Microneedling und Lash & Browlifting."
     />
     <meta name="theme-color" content="#2c2824" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Licorice&family=Manrope:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles/base.css?v=7" />
+    <link rel="stylesheet" href="styles/index.css?v=7" />
   </head>
   <body>
-    <div class="announcement">NiSV Zertifiziert · Head-Spa · Diodenlaser · Aquafacial · Microneedling in Schorndorf</div>
+    <div class="announcement">NiSV zertifiziert seit 2019 · Dauerhafte Haarentfernung · Gesichtsbehandlungen · HeadSpa · Lash &amp; Browlifting in Schorndorf</div>
 
     <nav class="top-nav" aria-label="Hauptnavigation">
       <a class="nav-logo" href="index.html"
@@ -24,11 +30,11 @@
       </a>
       <ul class="nav-links">
         <li><a href="#services">Leistungen</a></li>
-        <li><a href="#about">Über uns</a></li>
+        <li><a href="#why">Warum wir</a></li>
+        <li><a href="#about">Über mich</a></li>
         <li><a href="#prices">Preise</a></li>
-        <li><a href="#retreat">HeadSpa</a></li>
       </ul>
-      <a class="nav-cta" href="#prices">Termin anfragen</a>
+      <a class="nav-cta" href="#contact">Termin anfragen</a>
     </nav>
 
     <section id="hero" class="section hero">
@@ -38,7 +44,7 @@
 
       <div id="intro" class="section intro intro-overlay">
         <div class="inner">
-          <h2 class="section-title">Elevate your everyday.</h2>
+          <h2 class="section-title">Schöne Haut. Mehr Wohlbefinden.<br />Sichtbare Ergebnisse.</h2>
           <p class="section-tag">Dein Kosmetikstudio in Schorndorf</p>
         </div>
       </div>
@@ -46,12 +52,20 @@
 
     <section class="hero-text-section">
       <div class="inner hero-content">
-        <p class="eyebrow">Beauty Moments</p>
-        <h1>Deine Schönheit - Unser Fokus</h1>
+        <p class="eyebrow">Willkommen</p>
+        <h1>Deine Schönheit – unser Fokus</h1>
         <p>
-          Professionelle Hautbehandlungen mit modernster Technologie. Dauerhafte Ergebnisse,
-          die du verdient hast - in einer Wohlfühlatmosphäre in Schorndorf.
+          Willkommen bei Beauty Moments in Schorndorf. Mit modernen Behandlungsmethoden,
+          individueller Beratung und viel Leidenschaft begleiten wir dich auf dem Weg zu
+          einem gepflegten und strahlenden Hautbild.
         </p>
+        <div class="service-chips">
+          <span>Gesichtsbehandlungen</span>
+          <span>Dauerhafte Haarentfernung</span>
+          <span>Microneedling</span>
+          <span>HeadSpa</span>
+          <span>Lash- &amp; Browlifting</span>
+        </div>
       </div>
     </section>
 
@@ -61,74 +75,121 @@
         <h2 class="section-title">Unsere Leistungen</h2>
         <div class="cards">
           <article class="card">
-            <img src="assets/media-public/images/dioden.jpg" alt="Diodenlaser" loading="lazy" decoding="async" />
-            <h3>Diodenlaser</h3>
-            <p>Dauerhafte Haarentfernung mit modernster Diodenlaser-Technologie. Sanft, effektiv und dauerhaft.</p>
+            <img src="assets/media-public/images/dioden.jpg" alt="Dauerhafte Haarentfernung mit Diodenlaser" loading="lazy" decoding="async" />
+            <h3>Dauerhafte Haarentfernung</h3>
+            <p>Langfristig glatte Haut mit modernster Diodenlaser-Technologie. Sanft, effektiv und dauerhaft.</p>
           </article>
           <article class="card">
-            <img src="assets/media-public/images/aquafacial.jpg" alt="Aquafacial" loading="lazy" decoding="async" />
-            <h3>Aquafacial</h3>
-            <p>Die Gesichtsbehandlung für strahlende Haut. Reinigt, peelt und versorgt die Haut in einem Schritt.</p>
+            <img src="assets/media-public/images/aquafacial.jpg" alt="Gesichtsbehandlung" loading="lazy" decoding="async" />
+            <h3>Gesichtsbehandlungen</h3>
+            <p>Von der Classic-Reinigung über Aquafacial bis Microneedling – für ein sichtbar frisches, ebenmäßiges Hautbild.</p>
           </article>
           <article class="card">
-            <img src="assets/media-public/images/yoga.jpg" alt="Head Spa" loading="lazy" decoding="async" />
-            <h3>Head-Spa</h3>
-            <p>Wellness-Erlebnis für Kopfhaut und Seele mit Reinigung, Massage und intensiver Pflege.</p>
+            <img src="assets/media-public/images/headspa.jpg" alt="HeadSpa" loading="lazy" decoding="async" />
+            <h3>HeadSpa</h3>
+            <p>Ein Wohlfühl-Ritual für Kopfhaut und Seele mit Reinigung, Massage und intensiver Pflege.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="awards" class="section awards">
+    <section id="why" class="section why">
       <div class="inner">
-        <p class="section-tag">Qualität</p>
-        <h2 class="section-title">Unsere Auszeichnung</h2>
-        <div class="pillars">
-          <div class="pillar">
-            <h3>NISV ZERTIFIZIERT</h3>
-          </div>
-          <div class="pillar">
-            <h3>MODERNSTE TECHNOLOGIE</h3>
-          </div>
-          <div class="pillar">
-            <h3>PERSÖNLICHE BETREUUNG</h3>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section about">
-      <div class="inner about-wrap">
-        <img src="assets/media-public/images/studio.jpg" alt="Studio" loading="lazy" decoding="async" />
-        <div>
-          <p class="section-tag">Über uns</p>
-          <h2 class="section-title">Schönheit mit Leidenschaft</h2>
+        <p class="section-tag">Warum Beauty Moments?</p>
+        <h2 class="section-title">Bei uns stehst du im Mittelpunkt</h2>
+        <div class="why-grid">
           <p>
-            Seit 2019 ist Beauty Moments dein Kosmetikstudio für professionelle Hautbehandlungen in
-            Schorndorf. NiSV zertifiziert und mit modernster Technologie ausgestattet, bieten wir dir
-            Behandlungen, die wirklich etwas bewirken - in einer entspannten, persönlichen Atmosphäre.
+            Jede Haut ist einzigartig. Deshalb nehmen wir uns Zeit für eine persönliche
+            Beratung und erstellen individuelle Behandlungskonzepte, die auf deine Bedürfnisse
+            abgestimmt sind. Unser Ziel ist nicht nur kurzfristige Verschönerung, sondern
+            langfristig gesunde und gepflegte Haut.
           </p>
+          <ul class="check-list">
+            <li>Individuelle Hautanalyse</li>
+            <li>Moderne Technologien</li>
+            <li>Persönliche Betreuung</li>
+            <li>Entspannte Wohlfühlatmosphäre</li>
+            <li>Sichtbare Ergebnisse</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="testimonials" class="section testimonials">
+    <section id="haarentfernung" class="section retreat">
+      <div class="inner retreat-grid">
+        <img src="assets/media-public/images/dioden.jpg" alt="Dauerhafte Haarentfernung" loading="lazy" decoding="async" />
+        <div>
+          <p class="section-tag">Dauerhafte Haarentfernung</p>
+          <h2 class="section-title">Glatte Haut ohne ständiges Rasieren</h2>
+          <p>
+            Die dauerhafte Haarentfernung bietet eine moderne Lösung für langfristig glatte Haut.
+            Durch gezielte Lichtimpulse werden die Haarwurzeln behandelt und das Haarwachstum
+            nachhaltig reduziert.
+          </p>
+          <div class="suited">
+            <span>Geeignet für</span>
+            <ul>
+              <li>Beine</li>
+              <li>Achseln</li>
+              <li>Gesicht</li>
+              <li>Rücken</li>
+              <li>Intimbereich</li>
+            </ul>
+          </div>
+          <p class="retreat-meta">Vor jeder Behandlung erfolgt eine persönliche und ehrliche Beratung.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="lashbrow" class="section lashbrow">
       <div class="inner">
-        <p class="section-tag">Erfahrungen</p>
-        <h2 class="section-title">Das sagen unsere Kunden</h2>
-        <div class="quotes">
-          <blockquote>
-            <p>"Every treatment feels personal - they really take the time to understand what you need."</p>
-            <cite>Dane M</cite>
-          </blockquote>
-          <blockquote>
-            <p>"The facial left my skin glowing and my mind calm."</p>
-            <cite>Rae C</cite>
-          </blockquote>
-          <blockquote>
-            <p>"Hands down the best massage I have ever had. My back and shoulders feel brand new."</p>
-            <cite>Luis H</cite>
-          </blockquote>
+        <p class="section-tag">Lash &amp; Brow</p>
+        <h2 class="section-title">Lash &amp; Browlifting</h2>
+        <div class="lb-body">
+          <p>
+            Manchmal sind es die kleinen Details, die den größten Unterschied machen. Mit einem
+            Lash &amp; Browlifting verleihen wir deinem Blick mehr Ausdruck und unterstreichen deine
+            natürliche Schönheit – ganz ohne künstliche Wimpern oder tägliches Styling.
+          </p>
+          <p>
+            Beim Lashlifting erhalten deine natürlichen Wimpern einen wunderschönen Schwung für einen
+            offenen, strahlenden Blick. Beim Browlifting werden deine Augenbrauen individuell
+            vermessen, in Form gebracht und auf Wunsch gewachst sowie mit Hybridfarbe veredelt –
+            für ein besonders harmonisches und gepflegtes Ergebnis.
+          </p>
+          <p class="closing">Für einen ausdrucksstarken Blick – und das jeden Tag.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="retreat" class="section retreat">
+      <div class="inner retreat-grid media-right">
+        <img src="assets/media-public/images/headspa.jpg" alt="Head Spa Ritual" loading="lazy" decoding="async" />
+        <div>
+          <p class="section-tag">Head Spa</p>
+          <h2 class="section-title">Entspannung für Kopf, Haut und Seele</h2>
+          <p>
+            Unser Head Spa vereint intensive Kopfhautpflege mit wohltuender Entspannung und schenkt
+            dir eine bewusste Auszeit vom Alltag. Durch sanfte Massagetechniken, pflegende
+            Anwendungen und entspannende Rituale werden Kopfhaut und Haare verwöhnt, während
+            Körper und Geist zur Ruhe kommen.
+          </p>
+          <p>
+            Ein besonderes Highlight ist unser Shazay Head Spa mit diamantgefiltertem Wasser –
+            ein exklusives Ritual, das die Behandlung zu einem einzigartigen Wohlfühlerlebnis
+            macht und deinem Head Spa eine ganz besondere Note verleiht.
+          </p>
+          <div class="suited">
+            <span>Ideal bei</span>
+            <ul>
+              <li>Stress und Anspannung im Alltag</li>
+              <li>Trockener oder empfindlicher Kopfhaut</li>
+              <li>Dem Wunsch nach tiefer Entspannung</li>
+              <li>Müdem und glanzlosem Haar</li>
+              <li>Dem Bedürfnis nach einer besonderen Auszeit</li>
+            </ul>
+          </div>
+          <p class="retreat-meta"><strong>Dauer:</strong> 90 min | <strong>Preis:</strong> 149€</p>
         </div>
       </div>
     </section>
@@ -215,6 +276,49 @@
       </div>
     </section>
 
+    <section id="about" class="section about">
+      <div class="inner about-wrap">
+        <img src="assets/media-public/images/cindy.jpg" alt="Cindy, Inhaberin von Beauty Moments Schorndorf" loading="lazy" decoding="async" />
+        <div>
+          <p class="section-tag">Über mich</p>
+          <h2 class="section-title">Hinter Beauty Moments steht Cindy</h2>
+          <p>
+            Schönheit bedeutet für mich weit mehr als ein schönes Hautbild – es geht darum, sich
+            wohlzufühlen, Selbstvertrauen auszustrahlen und sich bewusst Zeit für sich selbst zu
+            nehmen. Mit Beauty Moments habe ich einen Ort geschaffen, an dem professionelle Kosmetik
+            auf persönliche Betreuung trifft.
+          </p>
+          <p>
+            NiSV-zertifiziert und seit 2019 für dich in Schorndorf. Durch regelmäßige Weiterbildungen
+            und moderne Behandlungsmethoden arbeite ich stets auf dem neuesten Stand – für die
+            bestmöglichen Ergebnisse.
+          </p>
+          <p class="signature">Deine Cindy</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+      <div class="inner">
+        <p class="section-tag">Erfahrungen</p>
+        <h2 class="section-title">Das sagen unsere Kunden</h2>
+        <div class="quotes">
+          <blockquote>
+            <p>„Jede Behandlung fühlt sich persönlich an – hier nimmt man sich wirklich Zeit, um zu verstehen, was man braucht."</p>
+            <cite>Dane M</cite>
+          </blockquote>
+          <blockquote>
+            <p>„Nach der Gesichtsbehandlung strahlt meine Haut und mein Kopf ist ganz ruhig."</p>
+            <cite>Rae C</cite>
+          </blockquote>
+          <blockquote>
+            <p>„Die beste Behandlung, die ich je hatte. Nacken und Schultern fühlen sich wie neu an."</p>
+            <cite>Luis H</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="section contact">
       <div class="inner contact-grid">
         <div class="contact-main">
@@ -283,27 +387,13 @@
               </div>
             </a>
           </div>
+
+          <p class="contact-signoff">Ich freue mich darauf, dich persönlich kennenzulernen.</p>
+          <p class="signature">Deine Cindy</p>
         </div>
 
         <div class="contact-image-placeholder">
-          <img src="assets/media-public/images/cindy.jpg" alt="Cindy bei der Arbeit im Studio in Schorndorf" loading="lazy" decoding="async" />
-        </div>
-      </div>
-    </section>
-
-    <section id="retreat" class="section retreat">
-      <div class="inner retreat-grid">
-        <img src="assets/media-public/images/headspa.jpg" alt="Head Spa Retreat" loading="lazy" decoding="async" />
-        <div>
-          <p class="section-tag">Head Spa</p>
-          <h2 class="section-title">HeadSpa - Soulful head retreat</h2>
-          <p>
-            Eine sanfte und zugleich intensive Haar- und Kopfhautreinigung bereitet dich auf das Ritual vor.
-            Eine nährende Maske entfaltet in der Kopfsauna mit wohltuendem Duft ihre volle Wirkung.
-            Der Doha-Bogen mit diamantgefiltertem Wasser schenkt Balance und Erdung. Zum Abschluss sorgt eine
-            intensive Massage von Kopf, Gesicht und Nacken für tiefe Entspannung und Leichtigkeit.
-          </p>
-          <p class="retreat-meta"><strong>Dauer:</strong> 90 min | <strong>Preis:</strong> 149€</p>
+          <img src="assets/media-public/images/studio.jpg" alt="Beauty Moments Studio in Schorndorf" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
