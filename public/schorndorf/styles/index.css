@@ -637,8 +637,12 @@ td strong {
 }
 
 .lashbrow .closing {
-  color: var(--charcoal);
-  font-size: 1.15rem;
+  color: var(--accent-dark);
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.45;
+  margin-top: 0.6rem;
 }
 
 /* Harmonisierte Absatz-Abstände in allen Textsektionen */
