@@ -68,16 +68,23 @@ curl -sI https://beautymoments.de/ | grep -i x-cache   # "Miss" = frisch vom Buc
 
 ## Analytics / Monitoring (cookielos, CloudFront-Logs)
 
-Reichweitenmessung ohne JS/Cookies. Architektur & Code: `infra/`.
+**Status: LIVE seit 2026-06-24.** Reichweitenmessung ohne JS/Cookies.
+Architektur & Code: `infra/`. Das Backend wurde direkt per CLI angelegt,
+nachdem dem Deploy-User die scoped Policy `infra/iam/cli-user-backend-policy.json`
+angehängt wurde; `infra/analytics.yaml` (CloudFormation) bleibt als
+gleichwertige IaC-/Referenz-Variante erhalten.
 
 - **Log-Bucket** `beautymoments-logs` (privat, ACLs an, Lifecycle: `cf/` 90 T,
   `athena-results/` 14 T). Alle drei Distributionen schreiben Standard-Logs
   nach `cf/` (Logging **aktiv** seit 2026-06-24).
-- **Backend** (Admin, via CloudFormation `infra/analytics.yaml`): Glue-Tabelle
-  `beautymoments_analytics.cf_logs`, Athena-Workgroup `beautymoments`, Lambda
-  `beautymoments-stats-agg` (täglich 03:00 UTC) → schreibt
+- **Backend** (live): Glue-Tabelle `beautymoments_analytics.cf_logs`,
+  Athena-Workgroup `beautymoments`, Lambda `beautymoments-stats-agg`
+  (Rolle `beautymoments-stats-agg-role`) per EventBridge-Rule
+  `beautymoments-stats-daily` täglich 03:00 UTC → schreibt
   `s3://beautymoments-main/stats/data/stats.json`.
   Salt: SSM SecureString `/beautymoments/analytics/salt`.
+  Manuell auslösen: `aws lambda invoke --function-name beautymoments-stats-agg
+  --region eu-central-1 /dev/stdout`.
 - **Dashboard**: `public/main/stats/` → `beautymoments.de/stats`, geschützt per
   CloudFront-Function `beautymoments-stats-auth` (Basic-Auth) auf eigenem
   `/stats*`-Behavior der main-Distribution.
