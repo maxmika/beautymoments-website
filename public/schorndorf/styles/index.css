@@ -233,30 +233,116 @@
 }
 
 .quotes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
   margin-top: 2.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-soft) transparent;
 }
 
-blockquote {
-  margin: 0;
-  padding: 1.5rem;
+.quotes::-webkit-scrollbar {
+  height: 6px;
+}
+
+.quotes::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+  border-radius: 3px;
+}
+
+.quotes-loading {
+  color: var(--accent-soft);
+  font-size: 0.95rem;
+}
+
+.quote {
+  flex: 0 0 clamp(260px, 78vw, 340px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
   border: 1px solid rgba(250, 249, 247, 0.16);
   background: rgba(250, 249, 247, 0.04);
 }
 
-blockquote p {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.75;
+.quote-stars {
+  color: var(--accent-soft);
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
 }
 
-blockquote cite {
+.quote-text {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 11;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.quote-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.quote-tags span {
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(250, 249, 247, 0.22);
+  border-radius: 999px;
+  color: var(--accent-soft);
+}
+
+.quote-foot {
+  margin-top: auto;
+  padding-top: 0.4rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.quote-foot cite {
+  font-style: normal;
   font-size: 0.9rem;
   letter-spacing: 0.06em;
+  color: var(--ivory);
+}
+
+.quote-date {
+  font-size: 0.72rem;
+  color: rgba(250, 249, 247, 0.5);
+  white-space: nowrap;
+}
+
+.quote-source {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
   color: var(--accent-soft);
-  font-style: normal;
+  text-decoration: none;
+}
+
+.quote-source:hover {
+  text-decoration: underline;
+}
+
+.quotes-hint {
+  margin: 1rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 249, 247, 0.4);
 }
 
 .prices {
@@ -575,6 +661,18 @@ td strong {
 .about .signature {
   color: var(--accent-dark);
   margin-top: 1.1rem;
+}
+
+.about .cert-badge {
+  display: inline-block;
+  margin-top: 1.1rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border: 1px solid var(--ivory-deep);
+  border-radius: 999px;
 }
 
 .contact .contact-signoff {

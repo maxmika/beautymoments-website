@@ -1,0 +1,167 @@
+{
+  "_hinweis": "Google-Rezensionen, separat pflegbar. Felder: name, rating (1-5), date (ISO), dateLabel (Anzeige), services (Pills), text, url (Google-Maps-Link). Reihenfolge = Anzeige-Reihenfolge (neueste zuerst). Datumsbasis bei Erfassung: 2026-06-24.",
+  "reviews": [
+    {
+      "name": "K. L.",
+      "rating": 5,
+      "date": "2026-06-10",
+      "dateLabel": "Juni 2026",
+      "services": [],
+      "text": "Wo soll ich anfangen? Man fühlt sich vom ersten Moment an wohl. Durch ihre herzliche Art und positive Ausstrahlung kann man sofort abschalten und den Alltag für eine Weile vergessen. Ich habe bereits schon eine Anti-Aging- und eine Aquafacial Behandlung machen lassen und bin von beiden absolut begeistert. Meine Haut war vorher trocken und uneben, jetzt ist sie wieder frisch, lebendig und gepflegt. Sogar mein Make-up sitzt seitdem deutlich besser. Die Behandlung ist unglaublich entspannend und eine echte Auszeit für mich. Deshalb werde ich sie jetzt regelmäßig machen lassen, um mir und meiner Haut etwas Gutes zu tun. Absolute Empfehlung! ✨💕",
+      "url": "https://maps.app.goo.gl/SgsqFqf2T8DTQWXr8"
+    },
+    {
+      "name": "Kevin",
+      "rating": 5,
+      "date": "2026-05-24",
+      "dateLabel": "Mai 2026",
+      "services": ["Laser-Haarentfernung"],
+      "text": "Ich bin schon länger Kunde bei Cindy und rundum begeistert! Die Laserbehandlungen zeigen bei mir tollen Erfolg und ich fühle mich jedes Mal bestens aufgehoben. Cindy ist nicht nur menschlich unglaublich herzlich, sondern überzeugt auch fachlich mit ehrlicher und kompetenter Beratung. Besonders schätze ich, dass sie offen anspricht, was möglich ist und was eventuell schwierig werden könnte – ehrlich, transparent und absolut professionell. Man merkt sofort, dass ihr das Wohl ihrer Kunden wirklich wichtig ist. Ich kann sie von Herzen weiterempfehlen!",
+      "url": "https://maps.app.goo.gl/FyT39y7kr8g2s9Mq9"
+    },
+    {
+      "name": "Fabian Rietz",
+      "rating": 5,
+      "date": "2026-05-24",
+      "dateLabel": "Mai 2026",
+      "services": ["Augenbrauen zupfen"],
+      "text": "Ich kann Cindy und ihre beiden Studios in Schwäbisch Gmünd und Schorndorf von Herzen weiterempfehlen! ❤️ Schon beim Betreten fühlt man sich sofort wohl und willkommen. Cindy überzeugt nicht nur mit ihrer unglaublich freundlichen, offenen und herzlichen Art, sondern vor allem auch mit ihrer hohen Kompetenz und Professionalität. Man merkt sofort, dass sie ihren Beruf mit Leidenschaft ausübt. Besonders begeistert bin ich von der Aquafacial-Behandlung und den Gesichtsbehandlungen. Meine Haut hat sich sichtbar verbessert – sie fühlt sich frischer, reiner und strahlender an. Jede Behandlung wird individuell angepasst und mit viel Sorgfalt durchgeführt. Die Studios sind modern, sauber und mit viel Liebe eingerichtet. Man kann dort wunderbar entspannen und sich einfach verwöhnen lassen. Cindy nimmt sich Zeit für ihre Kunden, berät ehrlich und schafft eine angenehme Atmosphäre, in der man sich rundum gut aufgehoben fühlt. Absolute Empfehlung für alle, die Wert auf professionelle Behandlungen, tolle Ergebnisse und eine herzliche Betreuung legen!",
+      "url": "https://maps.app.goo.gl/CedS415vmpycCoYf8"
+    },
+    {
+      "name": "Lena Schuler",
+      "rating": 5,
+      "date": "2026-05-24",
+      "dateLabel": "Mai 2026",
+      "services": [],
+      "text": "Ich bin schon länger Kundin bei Cindy, um mir meine Wimpern verschönern zu lassen und gestern war ich das erste Mal bei der Gesichtsbehandlung und es war einfach mega. Meine Haut ist sehr empfindlich und anfänglich hatte ich Angst, dass meine Haut reagieren könnte aber es war nichts, kein brennen oder jucken. Da sieht man, dass bei Beauty Moments sehr viel Wert auf sehr gute Produkte gelegt wird. Der nächste Termin für die Gesichtsbehandlung wurde ausgemacht. Nicht nur die Behandlung und das Studio kann ich besten Gewissens weiter empfehlen sondern auch Cindy selber, die mit ihrer offenen und herzlichen Art auf ihre Kunden/Kundinnen zugeht und auf alle Fragen und Wünsche eingeht. Bei ihr fühlt man sich sofort wohl.",
+      "url": "https://maps.app.goo.gl/E4tEbgYzhjSzZwv27"
+    },
+    {
+      "name": "Nina",
+      "rating": 5,
+      "date": "2026-04-24",
+      "dateLabel": "April 2026",
+      "services": [],
+      "text": "Ich hatte heute mein erstes Aquafacial und bin total zufrieden! Meine Haut fühlt sich super sauber, weich und richtig frisch an. Man merkt sofort den Unterschied ✨ Ich habe mich die ganze Zeit sehr wohl gefühlt und komme auf jeden Fall wieder!",
+      "url": "https://maps.app.goo.gl/8xiuM96JhZVxjhiy7"
+    },
+    {
+      "name": "Ekaterina Litvinova",
+      "rating": 5,
+      "date": "2026-03-24",
+      "dateLabel": "März 2026",
+      "services": [],
+      "text": "Cindy ist mit Abstand die beste Wimpernstylistin, die ich kenne! Ich war schon mehrmals bei ihr zur Wimpernverlängerung und war jedes Mal super zufrieden. Das Ergebnis sieht immer wunderschön und sehr gepflegt aus 😍 Vor Kurzem habe ich bei ihr auch zum ersten Mal das Head Spa ausprobiert und kann es sehr empfehlen. Man kann dabei so gut abschalten, kommt richtig zur Ruhe und fühlt sich danach einfach rundum wohl. Auch als Geschenk ist das eine richtig schöne Idee 🫶🏻✨",
+      "url": "https://maps.app.goo.gl/NbQ3bnCudwvYEToj8"
+    },
+    {
+      "name": "Fabienne Kala",
+      "rating": 5,
+      "date": "2026-03-24",
+      "dateLabel": "März 2026",
+      "services": [],
+      "text": "Ich bin aktuell zur Laserbehandlung bei dieser süßen Maus und bin wirklich mehr als zufrieden🥰 Sie macht eine großartige Arbeit und schafft eine Atmosphäre, in der man sich einfach rundum wohlfühlt – was mir persönlich super wichtig ist. ✨ Schon nach der ersten Behandlung habe ich tolle Ergebnisse gesehen und freue mich jetzt umso mehr auf die nächsten Termine bei ihr. 💞 Ich kann sie wirklich von Herzen weiterempfehlen😊",
+      "url": "https://maps.app.goo.gl/nvqqpgeQRWoEYNSX8"
+    },
+    {
+      "name": "Mo",
+      "rating": 5,
+      "date": "2026-02-24",
+      "dateLabel": "Februar 2026",
+      "services": ["Laser-Haarentfernung", "Wimpernverlängerung"],
+      "text": "Ich bin schon länger Kundin bei Cindy, zum Wimpern machen. Da ich einfach nur begeistert von ihr und ihrer Arbeit bin, habe ich nun auch mit der Haarentfernung durch Laser begonnen. Das Studio in Schorndorf ist genau so sauber, hygienisch und modern wie in Schwäbisch Gmünd. Cindy erklärt einem alles ausführlich und beantwortet Fragen professionell. Auf Hygiene wird in ihren Studios sehr viel Wert gelegt und man fühlt sich sofort wohl und sehr gut aufgehoben. Es ist jedesmal ein kleiner Wellness Moment, wenn ich bei ihr bin. Ich kann sie jedem empfehlen und bin jedes mal total begeistert von den Ergebnissen. Die Laserbehandlung ist bei mir schmerzfrei verlaufen (das empfindet natürlich jeder anders, bis jetzt haben wir Achseln und Oberlippe behandelt, Beine folgen) und ich konnte schon nach dem ersten Termin deutliche Erfolge feststellen. Ich kann Cindy jedem weiterempfehlen, der Wert auf professionelle, hygienische und herzliche Behandlungen Wert legt und wie ich eine perfektionistische Ader hat. Denn für mich ist ihre Arbeit jedes Mal perfekt 😍",
+      "url": "https://maps.app.goo.gl/CXDLccCR1Zks7mg46"
+    },
+    {
+      "name": "Mia Weißer",
+      "rating": 5,
+      "date": "2025-10-24",
+      "dateLabel": "Oktober 2025",
+      "services": [],
+      "text": "Ich war zur Haarentfernung bei Cindy im Studio und bin total begeistert! Das Studio selbst ist super sauber, modern und sehr ordentlich, man fühlt sich sofort wohl und in guten Händen. Hygiene wird hier wirklich großgeschrieben, was mir persönlich bei solchen Behandlungen sehr wichtig ist. Cindy war total freundlich, professionell und gleichzeitig richtig herzlich. Sie hat alles gut erklärt, ist auf meine Fragen eingegangen und die Behandlung war viel angenehmer, als ich erwartet hatte. Ich bin mit dem Ergebnis super zufrieden und freue mich schon auf den nächsten Termin. Wer Wert auf Qualität, Sauberkeit und eine liebevolle Behandlung legt ist bei Cindy genau richtig! Danke für die tolle Erfahrung 🌸",
+      "url": "https://maps.app.goo.gl/cATN4ATqhhw55G638"
+    },
+    {
+      "name": "Manuela Omerovic",
+      "rating": 5,
+      "date": "2025-10-24",
+      "dateLabel": "Oktober 2025",
+      "services": ["Wimpernverlängerung"],
+      "text": "Ich bin selber Wimpern Fee gewesen und es war immer so schwer jemanden zu finden die ihre Arbeit mit Leidenschaft und viel Liebe macht. Cindy Gottseidank hab ich dich gesucht und gefunden 😍 meine wimpernverlängerung sieht nach drei Wochen einfach noch so voll und schön aus!!! Sie erfüllt deine Wünsche arbeitet genau & Perfektionist in Person. Ich kann mit guten Gewissen und vollem Vertrauen Cindy empfehlen sogar das Haar Lasern ist der Wahnsinn !!!!",
+      "url": "https://maps.app.goo.gl/UvEHPCETWqrmQ14V7"
+    },
+    {
+      "name": "Sophia Hess",
+      "rating": 5,
+      "date": "2025-07-24",
+      "dateLabel": "Juli 2025",
+      "services": [],
+      "text": "Die Wimpernverlängerung bei Cindy ist einfach ein Traum. Ich bin schon lange Stammkundin und vertraue auch nur ihr meine Wimpern an. Sie ist ein so herzlicher und netter Mensch und ihre Arbeit ist wirklich der Hammer. Wer noch nie bei Cindy war, sollte dies auf jeden Fall direkt nachholen. Ganz ganz große herzliche Empfehlung von mir. Super Studio, herzensgute Inhaberin und tolle Atmosphäre🥰",
+      "url": "https://maps.app.goo.gl/jcmvJkqnfW3erZLZA"
+    },
+    {
+      "name": "Isa Rummert",
+      "rating": 5,
+      "date": "2025-07-24",
+      "dateLabel": "Juli 2025",
+      "services": ["Wimpernverlängerung"],
+      "text": "Ich bin absolut begeistert! Schon beim ersten Termin habe ich mich bei Cindy super wohlgefühlt. Die Atmosphäre ist total entspannt und professionell, und sie nimmt sich wirklich Zeit, um auf individuelle Wünsche einzugehen. Die Haltbarkeit ist top und das Ergebnis jedes Mal perfekt. Kann ich von Herzen weiterempfehlen – ich komme definitiv immer wieder!",
+      "url": "https://maps.app.goo.gl/U9PyPHkyUrs3K68Y8"
+    },
+    {
+      "name": "Susanne Maier",
+      "rating": 5,
+      "date": "2025-07-24",
+      "dateLabel": "Juli 2025",
+      "services": [],
+      "text": "Ich lass mich so gerne von den professionellen Händen von Cindy Lasern. Seit dem hab ich nicht nur weniger Haarwuchs sondern auch mehr Vertrauen in mich selber. Sie ist einfach nur top !❤️",
+      "url": "https://maps.app.goo.gl/4dCkgQSQ3xNGHSEC9"
+    },
+    {
+      "name": "Beata Adamov",
+      "rating": 5,
+      "date": "2025-06-24",
+      "dateLabel": "Juni 2025",
+      "services": ["Laser-Haarentfernung"],
+      "text": "Ich bin seit Feb.2025 bei Cindy mit einer dauerhaften Haarentfernung in Behandlung und bin total begeistert von dem Ergebnis. Gott sei Dank gibt es eine Methode um die lästigen Haare ( Beine, Arme, Achseln) los zu werden. Mit wurden 10 Sitzungen angeraten, schon nach der zweiten Behandlung habe ich erste Ergebnisse gesehen! Bin total begeistert! Ich würde jederzeit wieder zu Cindy Ölke gehen, da man gut aufgeklärt wurde im Beratungsgespräch und immer freundlich behandelt wird. Empfehlenswert!",
+      "url": "https://maps.app.goo.gl/m5sRVyVgtnYNKqUC6"
+    },
+    {
+      "name": "lea Lea",
+      "rating": 5,
+      "date": "2025-06-24",
+      "dateLabel": "Juni 2025",
+      "services": [],
+      "text": "Ich gehe jetzt schon seit längerer Zeit zu Cindy. Ich mache bei ihr das Lashlifting & browlifting und sie macht es mit Abstand am besten! Es sieht so gut aus! Außerdem mach ich regelmäßig eine Gesichtsbehandlung und meine Haut (Pickel und Rötungen) wurden schon so viel besser. Man merkt das Cindy richtig Ahnung von ihrem Fach hat und auch individuell auf die Haut eingeht. Ich kann sie absolut nur weiter empfehlen nicht nur von ihrem können sondern auch weil sie einfach ein Herzensmensch ist!",
+      "url": "https://maps.app.goo.gl/dqwwS3YfVh7xEL1Z7"
+    },
+    {
+      "name": "Janina",
+      "rating": 5,
+      "date": "2025-06-24",
+      "dateLabel": "Juni 2025",
+      "services": ["Augenbrauenverschönerung", "Augenbrauenkorrektur", "Laser-Haarentfernung", "Augenbrauen zupfen", "Augenbrauenlaminierung"],
+      "text": "Ein super schönes Kosmetikstudio mit einer tollen Inhaberin, die weiß was sie tut. Ich komme regelmäßig zum Browlifting und bin jedes Mal begeistert wie toll es aussieht. Cindy gibt sich viel Mühe um eine tolle Atmosphäre zu schaffen und sie geht jederzeit auf Wünsche ein.",
+      "url": "https://maps.app.goo.gl/TcVVFYBskWfjRwhK6"
+    },
+    {
+      "name": "Camille Eller",
+      "rating": 5,
+      "date": "2025-06-24",
+      "dateLabel": "Juni 2025",
+      "services": ["Wimpernverlängerung"],
+      "text": "Cindy ist mit Abstand die beste Wimpern Stylistin die ich kenne. Ich bin seit nun 3 Jahren Stammkundin und möchte nie wieder wo anderst hin gehen. Sie ist eine so herzliche Person die ihr Handwerk perfekt gelernt hat und zudem eine super Gesprächspartnerin ist, während man von ihr schön gemacht wird. 🥰",
+      "url": "https://maps.app.goo.gl/5dMwTE2QMrLpbGBSA"
+    },
+    {
+      "name": "Alica Jellena",
+      "rating": 5,
+      "date": "2025-06-24",
+      "dateLabel": "Juni 2025",
+      "services": ["Augenbrauenverschönerung", "Augenbrauenkorrektur", "Laser-Haarentfernung", "Wimpernlifting", "Augenbrauenlaminierung", "Wimpernwelle"],
+      "text": "Danke für das tolle Lashlifting, bisher hat es keine so gut hinbekommen und das, obwohl meine Augen Tränen, da ich sehr Lichtempfindlich bin. Tolle Beratung und Tipps! Cindy ist einfach die Beste! Kann ich jedem nur empfehlen.",
+      "url": "https://maps.app.goo.gl/M5cmNCeFuZZRvoJU6"
+    }
+  ]
+}
