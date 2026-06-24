@@ -1,0 +1,77 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SsmSalt",
+      "Effect": "Allow",
+      "Action": ["ssm:PutParameter", "ssm:GetParameter", "ssm:DeleteParameter", "ssm:AddTagsToResource"],
+      "Resource": "arn:aws:ssm:eu-central-1:916046697004:parameter/beautymoments/analytics/*"
+    },
+    {
+      "Sid": "KmsForSsmSecureString",
+      "Effect": "Allow",
+      "Action": ["kms:Encrypt", "kms:Decrypt", "kms:GenerateDataKey", "kms:DescribeKey"],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "kms:ViaService": "ssm.eu-central-1.amazonaws.com" } }
+    },
+    {
+      "Sid": "Glue",
+      "Effect": "Allow",
+      "Action": [
+        "glue:CreateDatabase", "glue:GetDatabase", "glue:DeleteDatabase",
+        "glue:CreateTable", "glue:GetTable", "glue:UpdateTable", "glue:DeleteTable"
+      ],
+      "Resource": [
+        "arn:aws:glue:eu-central-1:916046697004:catalog",
+        "arn:aws:glue:eu-central-1:916046697004:database/beautymoments_analytics",
+        "arn:aws:glue:eu-central-1:916046697004:table/beautymoments_analytics/*"
+      ]
+    },
+    {
+      "Sid": "Athena",
+      "Effect": "Allow",
+      "Action": [
+        "athena:CreateWorkGroup", "athena:GetWorkGroup", "athena:DeleteWorkGroup",
+        "athena:StartQueryExecution", "athena:GetQueryExecution",
+        "athena:GetQueryResults", "athena:StopQueryExecution"
+      ],
+      "Resource": "arn:aws:athena:eu-central-1:916046697004:workgroup/beautymoments"
+    },
+    {
+      "Sid": "IamRoleForLambda",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateRole", "iam:GetRole", "iam:DeleteRole", "iam:TagRole",
+        "iam:PutRolePolicy", "iam:GetRolePolicy", "iam:DeleteRolePolicy", "iam:ListRolePolicies"
+      ],
+      "Resource": "arn:aws:iam::916046697004:role/beautymoments-stats-agg-role"
+    },
+    {
+      "Sid": "PassExecutionRoleToLambdaOnly",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::916046697004:role/beautymoments-stats-agg-role",
+      "Condition": { "StringEquals": { "iam:PassedToService": "lambda.amazonaws.com" } }
+    },
+    {
+      "Sid": "Lambda",
+      "Effect": "Allow",
+      "Action": [
+        "lambda:CreateFunction", "lambda:GetFunction", "lambda:GetFunctionConfiguration",
+        "lambda:UpdateFunctionCode", "lambda:UpdateFunctionConfiguration",
+        "lambda:DeleteFunction", "lambda:InvokeFunction",
+        "lambda:AddPermission", "lambda:RemovePermission"
+      ],
+      "Resource": "arn:aws:lambda:eu-central-1:916046697004:function:beautymoments-stats-agg"
+    },
+    {
+      "Sid": "EventBridgeSchedule",
+      "Effect": "Allow",
+      "Action": [
+        "events:PutRule", "events:DescribeRule", "events:DeleteRule",
+        "events:PutTargets", "events:RemoveTargets", "events:ListTargetsByRule"
+      ],
+      "Resource": "arn:aws:events:eu-central-1:916046697004:rule/beautymoments-stats-daily"
+    }
+  ]
+}
