@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Beauty Moments — Statistik</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#2c2824" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <style>
+      :root {
+        --ivory: #faf9f7;
+        --ivory-dark: #f2ede6;
+        --charcoal: #2c2824;
+        --text-soft: #6b6258;
+        --accent: #7d8b6a;
+        --accent-dark: #5f6d4e;
+        --card: #ffffff;
+        --line: #e8e0d5;
+        --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--ivory);
+        color: var(--charcoal);
+        font-family: var(--sans);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 64px; }
+      header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+      h1 { font-size: 1.5rem; margin: 0; letter-spacing: 0.01em; }
+      .updated { color: var(--text-soft); font-size: 0.85rem; }
+      .sub { color: var(--text-soft); font-size: 0.9rem; margin: 2px 0 24px; }
+
+      .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+      .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+      .kpi .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); }
+      .kpi .value { font-size: 2.1rem; font-weight: 700; margin-top: 6px; color: var(--accent-dark); }
+      .kpi .meta { font-size: 0.8rem; color: var(--text-soft); margin-top: 2px; }
+
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 22px; }
+      .card h2 { font-size: 1.02rem; margin: 0 0 16px; }
+      .chart-box { position: relative; height: 260px; }
+
+      table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+      th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+      th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-soft); font-weight: 600; }
+      td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+      .site-tag { font-size: 0.72rem; color: var(--text-soft); }
+
+      .state { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 40px 24px; text-align: center; color: var(--text-soft); }
+      .state strong { color: var(--charcoal); display: block; margin-bottom: 6px; font-size: 1.05rem; }
+      .hidden { display: none; }
+      footer { color: var(--text-soft); font-size: 0.78rem; margin-top: 30px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Beauty Moments — Statistik</h1>
+        <span class="updated" id="updated"></span>
+      </header>
+      <p class="sub" id="range"></p>
+
+      <div id="loading" class="state">Lade Daten …</div>
+
+      <div id="error" class="state hidden">
+        <strong>Noch keine Daten verfügbar</strong>
+        Die Auswertung läuft einmal pro Nacht. Sobald der erste Lauf erfolgt ist,
+        erscheinen hier die Zahlen.
+      </div>
+
+      <div id="content" class="hidden">
+        <div class="kpis">
+          <div class="kpi">
+            <div class="label">Monthly Active Users</div>
+            <div class="value" id="mau">–</div>
+            <div class="meta" id="mau-month"></div>
+          </div>
+          <div class="kpi">
+            <div class="label">Seitenaufrufe (30 Tage)</div>
+            <div class="value" id="pv-total">–</div>
+            <div class="meta">über alle Studios</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Ø Aufrufe / Tag</div>
+            <div class="value" id="pv-avg">–</div>
+            <div class="meta">letzte 30 Tage</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Seitenaufrufe pro Tag (30 Tage)</h2>
+          <div class="chart-box"><canvas id="dailyChart"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h2>Aufrufe pro Studio (30 Tage)</h2>
+          <div class="chart-box"><canvas id="siteChart"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h2>Meistbesuchte Seiten</h2>
+          <table>
+            <thead>
+              <tr><th>Seite</th><th class="num">Aufrufe</th></tr>
+            </thead>
+            <tbody id="pages-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer>Cookielose, aggregierte Auswertung der CloudFront-Server-Logs · keine Tracking-Cookies</footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+      const ACCENT = "#7d8b6a";
+      const ACCENT_DARK = "#5f6d4e";
+      const SITE_COLORS = { main: "#9aa88a", schorndorf: "#7d8b6a", gmuend: "#d39a6a" };
+      const fmt = (n) => new Intl.NumberFormat("de-DE").format(n ?? 0);
+
+      function show(id) {
+        for (const el of ["loading", "error", "content"]) {
+          document.getElementById(el).classList.toggle("hidden", el !== id);
+        }
+      }
+
+      function render(data) {
+        document.getElementById("updated").textContent =
+          data.generatedAt ? "Stand: " + new Date(data.generatedAt).toLocaleString("de-DE") : "";
+        document.getElementById("range").textContent =
+          "Zeitraum: letzte " + (data.rangeDays || 30) + " Tage";
+
+        document.getElementById("mau").textContent = fmt(data.mau?.current);
+        document.getElementById("mau-month").textContent = data.mau?.month || "";
+        const total = data.totals?.pageviews ?? 0;
+        document.getElementById("pv-total").textContent = fmt(total);
+        document.getElementById("pv-avg").textContent = fmt(Math.round(total / (data.rangeDays || 30)));
+
+        const daily = data.daily || [];
+        new Chart(document.getElementById("dailyChart"), {
+          type: "line",
+          data: {
+            labels: daily.map((d) => d.date.slice(5)),
+            datasets: [{
+              label: "Aufrufe",
+              data: daily.map((d) => d.pageviews),
+              borderColor: ACCENT_DARK,
+              backgroundColor: "rgba(125,139,106,0.15)",
+              fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2,
+            }],
+          },
+          options: { responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } },
+        });
+
+        const sites = data.sites || [];
+        new Chart(document.getElementById("siteChart"), {
+          type: "bar",
+          data: {
+            labels: sites.map((s) => s.label || s.key),
+            datasets: [{
+              label: "Aufrufe",
+              data: sites.map((s) => s.pageviews),
+              backgroundColor: sites.map((s) => SITE_COLORS[s.key] || ACCENT),
+              borderRadius: 6,
+            }],
+          },
+          options: { responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } },
+        });
+
+        const body = document.getElementById("pages-body");
+        body.innerHTML = "";
+        for (const p of (data.pages || []).slice(0, 15)) {
+          const tr = document.createElement("tr");
+          const label = (p.label || p.key || "") ;
+          tr.innerHTML =
+            '<td>' + escapeHtml(p.path || "/") +
+            ' <span class="site-tag">' + escapeHtml(label) + '</span></td>' +
+            '<td class="num">' + fmt(p.pageviews) + '</td>';
+          body.appendChild(tr);
+        }
+        show("content");
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, (c) =>
+          ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      }
+
+      fetch("./data/stats.json?ts=" + Date.now())
+        .then((r) => { if (!r.ok) throw new Error("no data"); return r.json(); })
+        .then(render)
+        .catch(() => show("error"));
+    </script>
+  </body>
+</html>

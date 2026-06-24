@@ -66,6 +66,34 @@ curl -sI https://beautymoments.de/ | grep -i x-cache   # "Miss" = frisch vom Buc
 | schorndorf.beautymoments.de | `beautymoments-schorndorf` | `EB9HJUM78XS5H` |
 | gmuend.beautymoments.de | `beautymoments-gmuend` | `E1F6YQTZC5B9SU` |
 
+## Analytics / Monitoring (cookielos, CloudFront-Logs)
+
+Reichweitenmessung ohne JS/Cookies. Architektur & Code: `infra/`.
+
+- **Log-Bucket** `beautymoments-logs` (privat, ACLs an, Lifecycle: `cf/` 90 T,
+  `athena-results/` 14 T). Alle drei Distributionen schreiben Standard-Logs
+  nach `cf/` (Logging **aktiv** seit 2026-06-24).
+- **Backend** (Admin, via CloudFormation `infra/analytics.yaml`): Glue-Tabelle
+  `beautymoments_analytics.cf_logs`, Athena-Workgroup `beautymoments`, Lambda
+  `beautymoments-stats-agg` (täglich 03:00 UTC) → schreibt
+  `s3://beautymoments-main/stats/data/stats.json`.
+  Salt: SSM SecureString `/beautymoments/analytics/salt`.
+- **Dashboard**: `public/main/stats/` → `beautymoments.de/stats`, geschützt per
+  CloudFront-Function `beautymoments-stats-auth` (Basic-Auth) auf eigenem
+  `/stats*`-Behavior der main-Distribution.
+
+Backend deployen (Admin-Credentials):
+```bash
+aws ssm put-parameter --name /beautymoments/analytics/salt --type SecureString \
+  --value "<zufallswert>" --region eu-central-1
+aws cloudformation package --template-file infra/analytics.yaml \
+  --s3-bucket beautymoments-logs --s3-prefix lambda-code \
+  --output-template-file infra/analytics.packaged.yaml
+aws cloudformation deploy --template-file infra/analytics.packaged.yaml \
+  --stack-name beautymoments-analytics --capabilities CAPABILITY_NAMED_IAM \
+  --region eu-central-1
+```
+
 AWS-Account `916046697004` · Buckets in eu-central-1 · Hosted Zone
 `Z01106763EIPZC8SYYTPU` · ACM-Zertifikat in us-east-1 ·
 www→non-www-Redirect: CloudFront Function `beautymoments-www-redirect`

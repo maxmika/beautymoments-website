@@ -1,0 +1,200 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Beauty Moments analytics backend (admin-provisioned part): Glue table over
+  CloudFront logs, Athena workgroup, daily aggregator Lambda + role + schedule.
+  The log bucket, CloudFront logging, the /stats CloudFront function and the
+  static page are handled separately via the S3+CloudFront deploy user.
+
+Parameters:
+  LogBucketName:
+    Type: String
+    Default: beautymoments-logs
+    Description: Existing bucket that receives CloudFront standard logs (prefix cf/).
+  MainBucketName:
+    Type: String
+    Default: beautymoments-main
+    Description: Bucket of beautymoments.de where stats/data/stats.json is written.
+  SaltParamName:
+    Type: String
+    Default: /beautymoments/analytics/salt
+    Description: >
+      Name of a pre-created SSM SecureString holding the hashing salt.
+      Create it once (CFN cannot create SecureString):
+      aws ssm put-parameter --name /beautymoments/analytics/salt
+        --type SecureString --value "<random>" --region eu-central-1
+  ScheduleExpression:
+    Type: String
+    Default: cron(0 3 * * ? *)
+    Description: When the aggregator runs (daily 03:00 UTC).
+
+Resources:
+  GlueDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: beautymoments_analytics
+
+  CfLogsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      TableInput:
+        Name: cf_logs
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          classification: csv
+          skip.header.line.count: "2"
+        StorageDescriptor:
+          Location: !Sub s3://${LogBucketName}/cf/
+          InputFormat: org.apache.hadoop.mapred.TextInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+          SerdeInfo:
+            SerializationLibrary: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
+            Parameters:
+              field.delim: "\t"
+          Columns:
+            - { Name: date, Type: date }
+            - { Name: time, Type: string }
+            - { Name: location, Type: string }
+            - { Name: bytes, Type: bigint }
+            - { Name: request_ip, Type: string }
+            - { Name: method, Type: string }
+            - { Name: host, Type: string }
+            - { Name: uri, Type: string }
+            - { Name: status, Type: int }
+            - { Name: referrer, Type: string }
+            - { Name: user_agent, Type: string }
+            - { Name: query_string, Type: string }
+            - { Name: cookie, Type: string }
+            - { Name: result_type, Type: string }
+            - { Name: request_id, Type: string }
+            - { Name: host_header, Type: string }
+            - { Name: request_protocol, Type: string }
+            - { Name: request_bytes, Type: bigint }
+            - { Name: time_taken, Type: float }
+            - { Name: xforwarded_for, Type: string }
+            - { Name: ssl_protocol, Type: string }
+            - { Name: ssl_cipher, Type: string }
+            - { Name: response_result_type, Type: string }
+            - { Name: http_version, Type: string }
+            - { Name: fle_status, Type: string }
+            - { Name: fle_encrypted_fields, Type: int }
+            - { Name: c_port, Type: int }
+            - { Name: time_to_first_byte, Type: float }
+            - { Name: x_edge_detailed_result_type, Type: string }
+            - { Name: sc_content_type, Type: string }
+            - { Name: sc_content_len, Type: bigint }
+            - { Name: sc_range_start, Type: bigint }
+            - { Name: sc_range_end, Type: bigint }
+
+  AnalyticsWorkGroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: beautymoments
+      State: ENABLED
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        ResultConfiguration:
+          OutputLocation: !Sub s3://${LogBucketName}/athena-results/
+
+  AggregatorRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: beautymoments-stats-agg-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: stats-agg
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: Athena
+                Effect: Allow
+                Action:
+                  - athena:StartQueryExecution
+                  - athena:GetQueryExecution
+                  - athena:GetQueryResults
+                  - athena:StopQueryExecution
+                Resource: !Sub arn:aws:athena:${AWS::Region}:${AWS::AccountId}:workgroup/beautymoments
+              - Sid: Glue
+                Effect: Allow
+                Action: [glue:GetDatabase, glue:GetTable, glue:GetPartitions]
+                Resource:
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:catalog
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:database/beautymoments_analytics
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:table/beautymoments_analytics/*
+              - Sid: ReadLogsAndResults
+                Effect: Allow
+                Action: [s3:GetObject, s3:PutObject, s3:ListBucket]
+                Resource:
+                  - !Sub arn:aws:s3:::${LogBucketName}
+                  - !Sub arn:aws:s3:::${LogBucketName}/*
+              - Sid: WriteStats
+                Effect: Allow
+                Action: s3:PutObject
+                Resource: !Sub arn:aws:s3:::${MainBucketName}/stats/data/*
+              - Sid: Salt
+                Effect: Allow
+                Action: ssm:GetParameter
+                Resource: !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${SaltParamName}
+              - Sid: Kms
+                Effect: Allow
+                Action: kms:Decrypt
+                Resource: "*"
+                Condition:
+                  StringEquals:
+                    kms:ViaService: !Sub ssm.${AWS::Region}.amazonaws.com
+              - Sid: Logs
+                Effect: Allow
+                Action: [logs:CreateLogGroup, logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*
+
+  AggregatorFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: beautymoments-stats-agg
+      Runtime: python3.12
+      Handler: aggregate.handler
+      Timeout: 180
+      MemorySize: 256
+      Role: !GetAtt AggregatorRole.Arn
+      Code: ./lambda
+      Environment:
+        Variables:
+          ATHENA_DATABASE: beautymoments_analytics
+          ATHENA_TABLE: cf_logs
+          ATHENA_WORKGROUP: beautymoments
+          OUTPUT_BUCKET: !Ref MainBucketName
+          OUTPUT_KEY: stats/data/stats.json
+          SALT_PARAM: !Ref SaltParamName
+          RANGE_DAYS: "30"
+
+  DailySchedule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: beautymoments-stats-daily
+      ScheduleExpression: !Ref ScheduleExpression
+      State: ENABLED
+      Targets:
+        - Id: aggregator
+          Arn: !GetAtt AggregatorFunction.Arn
+
+  SchedulePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref AggregatorFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt DailySchedule.Arn
+
+Outputs:
+  FunctionName:
+    Value: !Ref AggregatorFunction
+  WorkGroup:
+    Value: !Ref AnalyticsWorkGroup
