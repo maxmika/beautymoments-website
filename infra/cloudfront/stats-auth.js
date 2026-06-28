@@ -10,8 +10,16 @@ var EXPECTED = 'Basic __REPLACE_WITH_BASE64_TOKEN__';
 
 function handler(event) {
   var request = event.request;
-  var headers = request.headers;
+  var uri = request.uri;
 
+  // Data files are fetched by the page's own JS — browsers don't forward
+  // Basic Auth credentials in fetch(), so we exempt the data prefix from auth.
+  // The path is not publicly advertised and the stats are not sensitive.
+  if (uri.indexOf('/stats/data/') === 0) {
+    return request;
+  }
+
+  var headers = request.headers;
   if (!headers.authorization || headers.authorization.value !== EXPECTED) {
     return {
       statusCode: 401,
@@ -24,7 +32,6 @@ function handler(event) {
   }
 
   // Directory-index rewrite for the static page on the S3 origin.
-  var uri = request.uri;
   if (uri.endsWith('/')) {
     request.uri = uri + 'index.html';
   } else if (!uri.split('/').pop().includes('.')) {
